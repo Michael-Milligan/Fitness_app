@@ -5,3 +5,10 @@ D:\GitHub\Projects\CS projects\Projects\Fitness App\bin\Debug\Fitness App.exe
 D:\GitHub\Projects\CS projects\Projects\Fitness App\bin\Debug\Fitness App.pdb
 D:\GitHub\Projects\CS projects\Projects\Fitness App\obj\Debug\Fitness App.exe
 D:\GitHub\Projects\CS projects\Projects\Fitness App\obj\Debug\Fitness App.pdb
+D:\GitHub\Fitness_app\Fitness App\bin\Debug\Fitness App.exe.config
+D:\GitHub\Fitness_app\Fitness App\bin\Debug\Fitness App.exe
+D:\GitHub\Fitness_app\Fitness App\bin\Debug\Fitness App.pdb
+D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.cache
+D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csproj.CoreCompileInputs.cache
+D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.exe
+D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.pdb

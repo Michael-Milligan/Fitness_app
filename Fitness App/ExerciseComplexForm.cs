@@ -1,14 +1,16 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Fitness_App
 {
     class ExerciseComplexForm : Window
     {
-        int ExerciseIndex;
-        public ExerciseComplexForm(string Title,ref ExerciseComplex ComplexArgument, int ExerciseIndex)
+        int ComplexIndex { get; }
+        public ExerciseComplexForm(string Title, ExerciseComplex ComplexArgument, int ComplexIndex)
         {
-            this.ExerciseIndex = ExerciseIndex;
+            this.ComplexIndex = ComplexIndex;
             this.Title = Title;
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Center;
@@ -30,6 +32,8 @@ namespace Fitness_App
                 #region Up
                 Button Up = new Button();
                 Up.Content = "^";
+                Up.Tag = i;
+                Up.Click += UpOnClick;
 
                 grid.Children.Add(Up);
                 Grid.SetRow(Up, i);
@@ -48,6 +52,8 @@ namespace Fitness_App
                 #region Down
                 Button Down = new Button();
                 Down.Content = "";
+                Down.Tag = i;
+                Down.Click += DownOnClick;
 
                 grid.Children.Add(Down);
                 Grid.SetRow(Down, i);
@@ -96,11 +102,11 @@ namespace Fitness_App
             Button Plus = Sender as Button;
             //Rewriting the resource file
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ExerciseIndex].Exercises[(int)Plus.Tag].ChangeNumberOfTimes(Result[ExerciseIndex].Exercises[(int)Plus.Tag].NumberOfTimes + 1);
+            Result[ComplexIndex].Exercises[(int)Plus.Tag].ChangeNumberOfTimes(Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes + 1);
             //Changing showed number
             Grid grid = Application.Current.Windows[0].Content as Grid;
             Button Number = grid.Children[grid.Children.IndexOf(Plus) + 1] as Button;
-            Number.Content = Result[ExerciseIndex].Exercises[(int)Plus.Tag].NumberOfTimes;
+            Number.Content = Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes;
             
             Methods.RewriteExercises(Result);
         }
@@ -111,13 +117,70 @@ namespace Fitness_App
             try
             {
                 ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-                Result[ExerciseIndex].Exercises[(int)Minus.Tag].ChangeNumberOfTimes(Result[ExerciseIndex].Exercises[(int)Minus.Tag].NumberOfTimes - 1);
+                Result[ComplexIndex].Exercises[(int)Minus.Tag].ChangeNumberOfTimes(Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes - 1);
                 Grid grid = Application.Current.Windows[0].Content as Grid;
                 Button Number = grid.Children[grid.Children.IndexOf(Minus) - 1] as Button;
-                Number.Content = Result[ExerciseIndex].Exercises[(int)Minus.Tag].NumberOfTimes;
+                Number.Content = Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes;
                 Methods.RewriteExercises(Result);
             }
             catch (System.ArgumentException) { }
+        }
+
+        public void UpOnClick(object Sender, RoutedEventArgs Args)
+        {
+            //Getting the complexes from the file
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            //GEtting the Button and the index
+            Button Up = Sender as Button;
+            int Index = (int)Up.Tag;
+            //Swapping the items
+            try
+            {
+                Exercise temp = Result[ComplexIndex].Exercises[Index];
+                Result[ComplexIndex].Exercises[Index] = 
+                    new Exercise(Result[ComplexIndex].Exercises[Index - 1]);
+                Result[ComplexIndex].Exercises[Index - 1] = new Exercise(temp);
+
+                //Rewriting the file
+                Methods.RewriteExercises(Result);
+                //Creating new Form
+                //TO DO: Temporary
+                ExerciseComplexForm New = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                    Result[ComplexIndex],
+                    ComplexIndex);
+                New.Show();
+                Application.Current.Windows[0].Close();
+            }
+            catch (System.Exception) { }
+            
+        }
+
+        public void DownOnClick(object Sender, RoutedEventArgs Args)
+        {
+            //Getting the complexes from the file
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            //GEtting the Button and the index
+            Button Down = Sender as Button;
+            int Index = (int)Down.Tag;
+            //Swapping the items
+            try
+            {
+                Exercise temp = Result[ComplexIndex].Exercises[Index];
+                Result[ComplexIndex].Exercises[Index] =
+                    new Exercise(Result[ComplexIndex].Exercises[Index + 1]);
+                Result[ComplexIndex].Exercises[Index + 1] = new Exercise(temp);
+
+                //Rewriting the file
+                Methods.RewriteExercises(Result);
+                //Creating new Form
+                //TO DO: Temporary
+                ExerciseComplexForm New = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                    Result[ComplexIndex],
+                    ComplexIndex);
+                New.Show();
+                Application.Current.Windows[0].Close();
+            }
+            catch (System.Exception) { }
         }
     }
 }

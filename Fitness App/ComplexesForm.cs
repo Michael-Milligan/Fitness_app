@@ -48,7 +48,7 @@ namespace Fitness_App
         {
             Button button = Sender as Button;
             ExerciseComplexForm Form = new ExerciseComplexForm(Complexes[(int)button.Tag].MuscleGroup, 
-                ref Complexes[(int)button.Tag],
+                Complexes[(int)button.Tag],
                 (int)button.Tag);
             Form.Show();
             Application.Current.MainWindow = Form;

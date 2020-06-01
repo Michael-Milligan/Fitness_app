@@ -16,5 +16,10 @@ namespace Fitness_App
             if (NewNumberOfTimes > 0) NumberOfTimes = NewNumberOfTimes;
             else throw new ArgumentException("Invalid number of times");
         }
+        public Exercise(Exercise Example)
+        {
+            Name = Example.Name;
+            NumberOfTimes = Example.NumberOfTimes;
+        }
     }
 }

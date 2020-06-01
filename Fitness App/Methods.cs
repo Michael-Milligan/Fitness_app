@@ -13,6 +13,10 @@ namespace Fitness_App
             File.Delete(MainWindow.Path);
             FileStream file =  File.Create(MainWindow.Path);
             file.Close();
+
+            ComplexesData = ComplexesData.
+                OrderBy(complex => complex.MuscleGroup).
+                ToArray();
             
             using (StreamWriter Writer = new StreamWriter(MainWindow.Path))
             {
