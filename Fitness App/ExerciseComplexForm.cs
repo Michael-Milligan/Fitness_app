@@ -143,15 +143,13 @@ namespace Fitness_App
 
                 //Rewriting the file
                 Methods.RewriteExercises(Result);
-                //Creating new Form
-                //TO DO: Temporary
-                ExerciseComplexForm New = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
-                    Result[ComplexIndex],
-                    ComplexIndex);
-                New.Show();
-                Application.Current.Windows[0].Close();
+                //Changing Form
+                Application.Current.Windows[0].Content =
+                    new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 
+                    Result[ComplexIndex], 
+                    ComplexIndex).Content as Grid;
             }
-            catch (System.Exception) { }
+            catch (System.OverflowException) { }
             
         }
 
@@ -172,13 +170,11 @@ namespace Fitness_App
 
                 //Rewriting the file
                 Methods.RewriteExercises(Result);
-                //Creating new Form
-                //TO DO: Temporary
-                ExerciseComplexForm New = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                //Changing Form
+                Application.Current.Windows[0].Content =
+                    new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
                     Result[ComplexIndex],
-                    ComplexIndex);
-                New.Show();
-                Application.Current.Windows[0].Close();
+                    ComplexIndex).Content as Grid;
             }
             catch (System.Exception) { }
         }
