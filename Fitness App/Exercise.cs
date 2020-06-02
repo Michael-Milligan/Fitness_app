@@ -6,12 +6,15 @@ namespace Fitness_App
     {
         public string Name { get; private set; }
         public int NumberOfTimes { get; private set; }
-        public Exercise(string Name, int NumberOfTimes)
+        public bool MeasuredInTimes { get; private set; }
+
+        public Exercise(string Name, int NumberOfTimes, bool MeasuredInTimes)
         {
             this.Name = Name;
             this.NumberOfTimes = NumberOfTimes;
+            this.MeasuredInTimes = MeasuredInTimes;
         }
-        public void ChangeNumberOfTimes(int NewNumberOfTimes)
+        public void ChangeQuantity(int NewNumberOfTimes)
         {
             if (NewNumberOfTimes > 0) NumberOfTimes = NewNumberOfTimes;
             else throw new ArgumentException("Invalid number of times");
@@ -20,6 +23,7 @@ namespace Fitness_App
         {
             Name = Example.Name;
             NumberOfTimes = Example.NumberOfTimes;
+            MeasuredInTimes = Example.MeasuredInTimes;
         }
     }
 }

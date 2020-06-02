@@ -22,6 +22,8 @@ namespace Fitness_App
 
             #region Exercises Complexes
             Button ExercisesComplexes = new Button();
+            ExercisesComplexes.Height = 50;
+            ExercisesComplexes.Width = 500;
             ExercisesComplexes.Content = "Complexes of exercises";
             ExercisesComplexes.Click += ProceedToCopmlexes;
             Panel.Children.Add(ExercisesComplexes);

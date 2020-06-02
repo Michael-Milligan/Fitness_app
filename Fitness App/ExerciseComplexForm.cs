@@ -15,7 +15,7 @@ namespace Fitness_App
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Center;
 
-            for (int i = 0; i < 6; ++i)
+            for (int i = 0; i < 7; ++i)
             {
                 ColumnDefinition Column = new ColumnDefinition();
                 if (i != 1) Column.Width = new GridLength(150, GridUnitType.Pixel);
@@ -91,9 +91,35 @@ namespace Fitness_App
                 Grid.SetColumn(Minus, 5);
                 #endregion
 
-                Content = grid;
-                Focus();
+                #region Remove
+                Button Remove = new Button();
+                Remove.Content = "Remove";
+                Remove.Tag = i;
+                Remove.Click += RemoveOnClick;
+
+                grid.Children.Add(Remove);
+                Grid.SetRow(Remove, i);
+                Grid.SetColumn(Remove, 6);
+                #endregion
             }
+
+            #region Add
+            RowDefinition RowAdd = new RowDefinition();
+            RowAdd.Height = new GridLength(50, GridUnitType.Pixel);
+            grid.RowDefinitions.Add(RowAdd);
+
+            Button Add = new Button();
+            Add.Content = "Add";
+            Add.Click += AddOnClick;
+
+            grid.Children.Add(Add);
+            
+            Grid.SetRow(Add, ComplexArgument.Exercises.Count);
+            Grid.SetColumnSpan(Add, 7);
+            #endregion
+
+            Content = grid;
+            Focus();
         }
 
         public void PlusOnClick(object Sender, RoutedEventArgs Args)
@@ -102,7 +128,7 @@ namespace Fitness_App
             Button Plus = Sender as Button;
             //Rewriting the resource file
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ComplexIndex].Exercises[(int)Plus.Tag].ChangeNumberOfTimes(Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes + 1);
+            Result[ComplexIndex].Exercises[(int)Plus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes + 1);
             //Changing showed number
             Grid grid = Application.Current.Windows[0].Content as Grid;
             Button Number = grid.Children[grid.Children.IndexOf(Plus) + 1] as Button;
@@ -117,7 +143,7 @@ namespace Fitness_App
             try
             {
                 ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-                Result[ComplexIndex].Exercises[(int)Minus.Tag].ChangeNumberOfTimes(Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes - 1);
+                Result[ComplexIndex].Exercises[(int)Minus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes - 1);
                 Grid grid = Application.Current.Windows[0].Content as Grid;
                 Button Number = grid.Children[grid.Children.IndexOf(Minus) - 1] as Button;
                 Number.Content = Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes;
@@ -177,6 +203,27 @@ namespace Fitness_App
                     ComplexIndex).Content as Grid;
             }
             catch (System.Exception) { }
+        }
+
+        public void AddOnClick(object Sender, RoutedEventArgs Args)
+        {
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+
+            AddExerciseForm Form = new AddExerciseForm(ComplexIndex);
+            Application.Current.Windows[0].Close();
+        }
+
+        public void RemoveOnClick(object Sender, RoutedEventArgs Args)
+        {
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            Button Remove = Sender as Button;
+            Result[ComplexIndex].
+                RemoveExercise(
+                Result[ComplexIndex].
+                Exercises[(int)Remove.Tag]);
+            Application.Current.Windows[0].Content =
+                (new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, Result[ComplexIndex], ComplexIndex).Content as Grid);
+            Methods.RewriteExercises(Result);
         }
     }
 }

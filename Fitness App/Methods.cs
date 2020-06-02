@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
-using System.Windows.Input;
 
 namespace Fitness_App
 {
@@ -24,7 +23,7 @@ namespace Fitness_App
                 {
                     foreach (var exercise in Complex.Exercises)
                     {
-                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Name} {exercise.NumberOfTimes}");
+                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Name} {exercise.NumberOfTimes} {exercise.MeasuredInTimes}");
                     }
                 }
             }
@@ -50,13 +49,13 @@ namespace Fitness_App
             ExerciseComplex[] Results = new ExerciseComplex[Groups.Count];
 
             int j = 0;
-
+            
             for (int i = 0; i < Data.GetLength(0);++j)
             {
                 Results[j] = new ExerciseComplex(Data[i][0]);
                 while(i < Data.GetLength(0) && Data[i][0] == Results[j].MuscleGroup)
                 {
-                    Results[j].Exercises.Add(new Exercise(Data[i][1], Convert.ToInt32(Data[i][2])));
+                    Results[j].Exercises.Add(new Exercise(Data[i][1], Convert.ToInt32(Data[i][2]), Convert.ToBoolean(Data[i][3])));
                     ++i;
                 }
             }
