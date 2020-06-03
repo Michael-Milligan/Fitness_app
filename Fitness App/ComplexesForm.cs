@@ -45,6 +45,14 @@ namespace Fitness_App
                 Grid.SetRow(Edit[i], i);
             }
 
+            Button Return = new Button();
+            Panel.RowDefinitions.Add(new RowDefinition());
+            Return.Content = "Return";
+            Return.Click += ExitOnClick;
+            Panel.Children.Add(Return);
+            Grid.SetRow(Return, Buttons.Length);
+            Grid.SetColumnSpan(Return, 2);
+
             Content = Panel;
         }
 
@@ -71,6 +79,12 @@ namespace Fitness_App
                 //Application.Current.MainWindow = Form;
                 //Application.Current.Windows[0].Close();
             }
+        }
+
+        public void ExitOnClick(object Sender, RoutedEventArgs Args)
+        {
+            new MainWindow().Show();
+            Application.Current.Windows[0].Close();
         }
     }
 }

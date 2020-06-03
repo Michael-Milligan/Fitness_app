@@ -28,6 +28,13 @@ namespace Fitness_App
             ExercisesComplexes.Click += ProceedToCopmlexes;
             Panel.Children.Add(ExercisesComplexes);
 
+            Button Exit = new Button();
+            Exit.Height = 50;
+            Exit.Width = 500;
+            Exit.Content = "Exit";
+            Exit.Click += ExitOnClick;
+            Panel.Children.Add(Exit);
+
             #endregion
 
 
@@ -40,6 +47,16 @@ namespace Fitness_App
             Form.Show();
             Application.Current.MainWindow = Form;
             Application.Current.Windows[0].Close();
+        }
+
+        public void ExitOnClick(object Sender, RoutedEventArgs Args)
+        {
+            MessageBoxResult Result = 
+                MessageBox.Show("Question", 
+                "Do you really want to quit?",
+                MessageBoxButton.YesNo, 
+                MessageBoxImage.Question);
+            if (Result == MessageBoxResult.Yes) Application.Current.Windows[0].Close();
         }
     }
 }
