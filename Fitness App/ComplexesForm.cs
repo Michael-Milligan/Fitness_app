@@ -26,6 +26,8 @@ namespace Fitness_App
                 Panel.RowDefinitions.Add(new RowDefinition());
                 Buttons[i] = new Button();
                 Buttons[i].Tag = i;
+                //Buttons[i].Width = 300;
+                //Buttons[i].Height = 50;
                 Buttons[i].Content = Complexes[i].MuscleGroup;
                 Buttons[i].Click += ReadinessControl;
                 Panel.Children.Add(Buttons[i]);
@@ -34,6 +36,8 @@ namespace Fitness_App
 
                 Edit[i] = new Button();
                 Edit[i].Tag = i;
+                //Edit[i].Width = 300;
+                //Edit[i].Height = 50;
                 Edit[i].Content = "Edit";
                 Edit[i].Click += EditOnClick;
                 Panel.Children.Add(Edit[i]);

@@ -79,7 +79,14 @@ namespace Fitness_App
             Send.Click += SendOnClick;
             grid.Children.Add(Send);
             Grid.SetRow(Send, 3);
-            Grid.SetColumnSpan(Send, 2);
+            Grid.SetColumn(Send, 0);
+
+            Button Return = new Button();
+            Return.Content = "Return";
+            Return.Click += ReturnOnClick;
+            grid.Children.Add(Return);
+            Grid.SetRow(Return, 3);
+            Grid.SetColumn(Return, 1);
 
             Show();
             Content = grid;
@@ -113,6 +120,16 @@ namespace Fitness_App
 
             new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 
                 Result[ComplexIndex], 
+                ComplexIndex).
+                    Show();
+            Application.Current.Windows[0].Close();
+        }
+
+        public void ReturnOnClick(object Sender, RoutedEventArgs Args)
+        {
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                Result[ComplexIndex],
                 ComplexIndex).
                     Show();
             Application.Current.Windows[0].Close();
