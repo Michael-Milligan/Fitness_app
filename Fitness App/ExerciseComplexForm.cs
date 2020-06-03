@@ -118,6 +118,21 @@ namespace Fitness_App
             Grid.SetColumnSpan(Add, 7);
             #endregion
 
+            #region Return
+            RowDefinition RowReturn = new RowDefinition();
+            RowReturn.Height = new GridLength(50, GridUnitType.Pixel);
+            grid.RowDefinitions.Add(RowReturn);
+
+            Button Return = new Button();
+            Return.Content = "Return";
+            Return.Click += ReturnOnClick;
+
+            grid.Children.Add(Return);
+
+            Grid.SetRow(Return, ComplexArgument.Exercises.Count + 1);
+            Grid.SetColumnSpan(Return, 7);
+            #endregion
+
             Content = grid;
             Focus();
         }
@@ -224,6 +239,13 @@ namespace Fitness_App
             Application.Current.Windows[0].Content =
                 (new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, Result[ComplexIndex], ComplexIndex).Content as Grid);
             Methods.RewriteExercises(Result);
+        }
+
+        public void ReturnOnClick(object Sender, RoutedEventArgs Args)
+        {
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            new ComplexesForm(Result).Show();
+            Application.Current.Windows[0].Close();
         }
     }
 }
