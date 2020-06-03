@@ -6,7 +6,7 @@ namespace Fitness_App
 {
     public class ExerciseComplex
     {
-        public List<Exercise> Exercises { get; private set; }
+        public List<Exercise> Exercises { get; set; }
 
         public string MuscleGroup { get;}
 

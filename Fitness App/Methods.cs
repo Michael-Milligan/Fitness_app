@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.Windows;
 
 namespace Fitness_App
 {
@@ -23,7 +24,7 @@ namespace Fitness_App
                 {
                     foreach (var exercise in Complex.Exercises)
                     {
-                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Name} {exercise.NumberOfTimes} {exercise.MeasuredInTimes}");
+                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Type} {exercise.Name} {exercise.NumberOfTimes} {exercise.MeasuredInTimes}");
                     }
                 }
             }
@@ -37,7 +38,7 @@ namespace Fitness_App
                 Select(String => String.Split()).
                 ToArray();
 
-            Data = Data.OrderBy(data => data[0]).ToArray();
+            Data = Data.OrderBy(data => data[0]).ThenBy(data => data[1]).ToArray();
 
             List<string> Groups = new List<string>();
 
@@ -55,7 +56,7 @@ namespace Fitness_App
                 Results[j] = new ExerciseComplex(Data[i][0]);
                 while(i < Data.GetLength(0) && Data[i][0] == Results[j].MuscleGroup)
                 {
-                    Results[j].Exercises.Add(new Exercise(Data[i][1], Convert.ToInt32(Data[i][2]), Convert.ToBoolean(Data[i][3])));
+                    Results[j].Exercises.Add(new Exercise(Data[i][1], Data[i][2], Convert.ToInt32(Data[i][3]), Convert.ToBoolean(Data[i][4])));
                     ++i;
                 }
             }

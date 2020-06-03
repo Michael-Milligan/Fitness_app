@@ -7,12 +7,14 @@ namespace Fitness_App
         public string Name { get; private set; }
         public int NumberOfTimes { get; private set; }
         public bool MeasuredInTimes { get; private set; }
+        public string Type { get; private set; }
 
-        public Exercise(string Name, int NumberOfTimes, bool MeasuredInTimes)
+        public Exercise(string Type ,string Name, int NumberOfTimes, bool MeasuredInTimes)
         {
             this.Name = Name;
             this.NumberOfTimes = NumberOfTimes;
             this.MeasuredInTimes = MeasuredInTimes;
+            this.Type = Type;
         }
         public void ChangeQuantity(int NewNumberOfTimes)
         {

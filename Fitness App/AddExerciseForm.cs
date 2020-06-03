@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,7 @@ namespace Fitness_App
         string ExerciseName;
         int Quantity;
         bool MeasuredInTimes;
+        string Type;
         int ComplexIndex;
 
         public Exercise Result { get; private set; }
@@ -29,48 +31,62 @@ namespace Fitness_App
 
             #region Labels
 
+
+            Label TypeLabel = new Label();
+            TypeLabel.Content = "Type: ";
+            grid.Children.Add(TypeLabel);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(TypeLabel, 0);
+            Grid.SetRow(TypeLabel, 0);
+
             Label NameLabel = new Label();
             NameLabel.Content = "Name: ";
             grid.Children.Add(NameLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(NameLabel, 0);
-            Grid.SetRow(NameLabel, 0);
+            Grid.SetRow(NameLabel, 1);
 
             Label QuantityLabel = new Label();
             QuantityLabel.Content = "Quantity of exercises: ";
             grid.Children.Add(QuantityLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(QuantityLabel, 0);
-            Grid.SetRow(QuantityLabel, 1);
+            Grid.SetRow(QuantityLabel, 2);
 
             Label MeasureLabel = new Label();
             MeasureLabel.Content = "Is it measured in times(1/0): ";
             grid.Children.Add(MeasureLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(MeasureLabel, 0);
-            Grid.SetRow(MeasureLabel, 2);
+            Grid.SetRow(MeasureLabel, 3);
 
             #endregion
 
             #region TextBoxes
 
+            TextBox TypeBox = new TextBox();
+            TypeBox.TextChanged += TypeOnChange;
+            grid.Children.Add(TypeBox);
+            Grid.SetColumn(TypeBox, 1);
+            Grid.SetRow(TypeBox, 0);
+
             TextBox NameBox = new TextBox();
             NameBox.TextChanged += NameOnChange;
             grid.Children.Add(NameBox);
             Grid.SetColumn(NameBox, 1);
-            Grid.SetRow(NameBox, 0);
+            Grid.SetRow(NameBox, 1);
 
             TextBox QuantityBox = new TextBox();
             QuantityBox.TextChanged += QuantityOnChange;
             grid.Children.Add(QuantityBox);
             Grid.SetColumn(QuantityBox, 1);
-            Grid.SetRow(QuantityBox, 1);
+            Grid.SetRow(QuantityBox, 2);
 
             TextBox MeasureBox = new TextBox();
             MeasureBox.TextChanged += MeasureOnChange;
             grid.Children.Add(MeasureBox);
             Grid.SetColumn(MeasureBox, 1);
-            Grid.SetRow(MeasureBox, 2);
+            Grid.SetRow(MeasureBox, 3);
             #endregion
 
             Button Send = new Button();
@@ -78,14 +94,14 @@ namespace Fitness_App
             grid.RowDefinitions.Add(new RowDefinition());
             Send.Click += SendOnClick;
             grid.Children.Add(Send);
-            Grid.SetRow(Send, 3);
+            Grid.SetRow(Send, 4);
             Grid.SetColumn(Send, 0);
 
             Button Return = new Button();
             Return.Content = "Return";
             Return.Click += ReturnOnClick;
             grid.Children.Add(Return);
-            Grid.SetRow(Return, 3);
+            Grid.SetRow(Return, 4);
             Grid.SetColumn(Return, 1);
 
             Show();
@@ -96,27 +112,39 @@ namespace Fitness_App
         public void MeasureOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[5] as TextBox).Text));
+            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[7] as TextBox).Text));
         }
 
         #region Done
+
+        public void TypeOnChange(object Sender, TextChangedEventArgs Args)
+        {
+            Grid grid = this.Content as Grid;
+            Type = (grid.Children[4] as TextBox).Text;
+        }
+
         public void NameOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            ExerciseName = (grid.Children[3] as TextBox).Text;
+            ExerciseName = (grid.Children[5] as TextBox).Text;
         }
 
         public void QuantityOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            Quantity = Convert.ToInt32((grid.Children[4] as TextBox).Text);
+            Quantity = Convert.ToInt32((grid.Children[6] as TextBox).Text);
         }
             
         public void SendOnClick(object Sender, RoutedEventArgs Args)
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ComplexIndex].AddExercise(new Exercise(ExerciseName, Quantity, MeasuredInTimes));
+            Result[ComplexIndex].AddExercise(new Exercise(Type, ExerciseName, Quantity, MeasuredInTimes));
             Methods.RewriteExercises(Result);
+
+            Result[ComplexIndex].Exercises = Result[ComplexIndex].
+                Exercises.
+                OrderBy(exercise => exercise.Type).
+                ToList();
 
             new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 
                 Result[ComplexIndex], 
