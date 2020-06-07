@@ -116,14 +116,19 @@ namespace Fitness_App
             { 
                 Player.Play();
                 NextExercise();
-                Timer.Start(); 
+                Timer.Start();
+                (Time as DispatcherTimer).Stop();
             }
         }
 
         public void NextExercise()
         {
-            CurrentExercise = new Exercise(Complex.Exercises[++ExerciseIndex]);
-            Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
+            if (!(ExerciseIndex > Complex.Exercises.Count))
+            {
+                CurrentExercise = new Exercise(Complex.Exercises[++ExerciseIndex]);
+                Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
+                Timer.Start();
+            }
         }
                 
     }
