@@ -75,9 +75,9 @@ namespace Fitness_App
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)
             {
-                //TODO: Implement ComplexExecutionWindow
-                //Application.Current.MainWindow = Form;
-                //Application.Current.Windows[0].Close();
+                Button button = Sender as Button;
+                new ExerciseExecutionForm(Complexes[(int)button.Tag]).Show();
+                Application.Current.Windows[0].Close();
             }
         }
 

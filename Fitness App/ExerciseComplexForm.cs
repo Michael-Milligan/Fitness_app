@@ -73,7 +73,7 @@ namespace Fitness_App
 
                 #region Number
                 Button Number = new Button();
-                Number.Content = ComplexArgument.Exercises[i].NumberOfTimes;
+                Number.Content = ComplexArgument.Exercises[i].Quantity;
 
                 grid.Children.Add(Number);
                 Grid.SetRow(Number, i);
@@ -143,11 +143,11 @@ namespace Fitness_App
             Button Plus = Sender as Button;
             //Rewriting the resource file
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ComplexIndex].Exercises[(int)Plus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes + 1);
+            Result[ComplexIndex].Exercises[(int)Plus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Plus.Tag].Quantity + 1);
             //Changing showed number
             Grid grid = Application.Current.Windows[0].Content as Grid;
             Button Number = grid.Children[grid.Children.IndexOf(Plus) + 1] as Button;
-            Number.Content = Result[ComplexIndex].Exercises[(int)Plus.Tag].NumberOfTimes;
+            Number.Content = Result[ComplexIndex].Exercises[(int)Plus.Tag].Quantity;
             
             Methods.RewriteExercises(Result);
         }
@@ -158,10 +158,10 @@ namespace Fitness_App
             try
             {
                 ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-                Result[ComplexIndex].Exercises[(int)Minus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes - 1);
+                Result[ComplexIndex].Exercises[(int)Minus.Tag].ChangeQuantity(Result[ComplexIndex].Exercises[(int)Minus.Tag].Quantity - 1);
                 Grid grid = Application.Current.Windows[0].Content as Grid;
                 Button Number = grid.Children[grid.Children.IndexOf(Minus) - 1] as Button;
-                Number.Content = Result[ComplexIndex].Exercises[(int)Minus.Tag].NumberOfTimes;
+                Number.Content = Result[ComplexIndex].Exercises[(int)Minus.Tag].Quantity;
                 Methods.RewriteExercises(Result);
             }
             catch (System.ArgumentException) { }

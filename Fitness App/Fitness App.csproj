@@ -54,6 +54,7 @@
     <Compile Include="Exercise.cs" />
     <Compile Include="ExerciseComplex.cs" />
     <Compile Include="ExerciseComplexForm.cs" />
+    <Compile Include="ExerciseExecutionForm.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

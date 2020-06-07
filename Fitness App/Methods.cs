@@ -24,7 +24,7 @@ namespace Fitness_App
                 {
                     foreach (var exercise in Complex.Exercises)
                     {
-                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Type} {exercise.Name} {exercise.NumberOfTimes} {exercise.MeasuredInTimes}");
+                        Writer.WriteLine($"{Complex.MuscleGroup} {exercise.Type} {exercise.Name} {exercise.Quantity} {exercise.MeasuredInTimes}");
                     }
                 }
             }
