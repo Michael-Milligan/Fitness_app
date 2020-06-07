@@ -129,6 +129,16 @@ namespace Fitness_App
                 Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
                 Timer.Start();
             }
+            else
+            {
+                MessageBox.Show("The complex was done! Congrats!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult Result = MessageBox.Show("Would you like to return to the Complexes page?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (Result == MessageBoxResult.No)
+                {
+                    new ComplexesForm(Methods.SynthesizeComplexes());
+                    Application.Current.Windows[0].Close();
+                }
+            }
         }
                 
     }
