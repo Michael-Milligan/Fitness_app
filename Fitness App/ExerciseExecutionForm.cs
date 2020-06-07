@@ -16,21 +16,20 @@ namespace Fitness_App
         Label NameLabel;
         Exercise CurrentExercise;
         int ExerciseIndex;
-        SoundPlayer Player = new SoundPlayer("Whistle.mp3");
+        SoundPlayer Player = new SoundPlayer("Whistle.wav");
 
         public ExerciseExecutionForm(ExerciseComplex Complex)
         {
             this.Complex = new ExerciseComplex(Complex.MuscleGroup);
             this.Complex.Exercises = Complex.Exercises.Where(item => item == item).ToList();
+            this.Complex.Exercises = this.Complex.Exercises.OrderBy(exercise => exercise.Type).
+                ThenBy(exercise => exercise.Name).ToList();
             Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, QuantityOnTick, Dispatcher.CurrentDispatcher);
-            Title = Complex.MuscleGroup + " Complex";
+            Title = this.Complex.MuscleGroup + " Complex";
 
-            foreach (var exercise in Complex.Exercises)
-            {
-                CurrentExercise = new Exercise(exercise);
-                ExerciseIndex = Complex.Exercises.FindIndex(new Predicate<Exercise>(item => item == exercise));
-                Content = BuildExercise(exercise);
-            }
+            CurrentExercise = new Exercise(Complex.Exercises[0]);
+            ExerciseIndex = this.Complex.Exercises.FindIndex(new Predicate<Exercise>(item => item == Complex.Exercises[0]));
+            Content = BuildExercise(Complex.Exercises[0]);
         }
 
         public Grid BuildExercise(Exercise exercise)
@@ -42,7 +41,7 @@ namespace Fitness_App
             NameLabel = new Label();
             grid.RowDefinitions.Add(new RowDefinition());
             NameLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-            NameLabel.Content = "Name";
+            NameLabel.Content = exercise.Name;
             grid.Children.Add(NameLabel);
             Grid.SetColumnSpan(NameLabel, 2);
             Grid.SetRow(NameLabel, 0);
@@ -95,26 +94,30 @@ namespace Fitness_App
             Panel.Children.Add(Message);
 
             Label Time = new Label();
-            Time.Content = 15;
+            Time.Content = 5;
             Time.HorizontalContentAlignment = HorizontalAlignment.Center;
             Panel.Children.Add(Time);
 
-            Timer timer = new Timer(new TimerCallback(TimerOnTick), Time.Content, 0, 1000);
-            if ((int)Time.Content == 0)
-            {
-                Player.Play();
-                timer.Dispose();
-                NextExercise();
-            }
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 1),
+                DispatcherPriority.Normal, 
+                TimerOnTick, 
+                Dispatcher.CurrentDispatcher);
             Application.Current.Windows[0].Content = Panel;
         }
 
-        public void TimerOnTick(object Time)
+        public void TimerOnTick(object Time, EventArgs Args)
         {
-            Timer.IsEnabled = false;
-            Time = (int)Time - 1;
-            ((Application.Current.Windows[0].Content as StackPanel).Children[1] as Label).Content = Time;
-            Timer.Start();
+            Label LocalTime = new Label();
+
+            LocalTime.Content = 
+                (int)(((Application.Current.Windows[0].Content as StackPanel).Children[1] as Label).Content) - 1;
+            ((Application.Current.Windows[0].Content as StackPanel).Children[1] as Label).Content = LocalTime.Content;
+            if ((int)LocalTime.Content == 0)
+            { 
+                Player.Play();
+                NextExercise();
+                Timer.Start(); 
+            }
         }
 
         public void NextExercise()
