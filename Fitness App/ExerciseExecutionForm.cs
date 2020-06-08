@@ -94,7 +94,7 @@ namespace Fitness_App
             Panel.Children.Add(Message);
 
             Label Time = new Label();
-            Time.Content = 5;
+            Time.Content = 2;
             Time.HorizontalContentAlignment = HorizontalAlignment.Center;
             Panel.Children.Add(Time);
 
@@ -123,13 +123,13 @@ namespace Fitness_App
 
         public void NextExercise()
         {
-            if (!(ExerciseIndex > Complex.Exercises.Count))
+            try
             {
                 CurrentExercise = new Exercise(Complex.Exercises[++ExerciseIndex]);
                 Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
                 Timer.Start();
             }
-            else
+            catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("The complex was done! Congrats!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
                 MessageBoxResult Result = MessageBox.Show("Would you like to return to the Complexes page?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
