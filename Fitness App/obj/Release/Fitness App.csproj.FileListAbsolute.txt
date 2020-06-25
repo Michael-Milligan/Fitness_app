@@ -1,0 +1,6 @@
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Release\Fitness App.exe.config
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Release\Fitness App.exe
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Release\Fitness App.pdb
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Release\Fitness App.csprojAssemblyReference.cache
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Release\Fitness App.exe
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Release\Fitness App.pdb

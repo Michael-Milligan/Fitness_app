@@ -12,3 +12,9 @@ D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.
 D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csproj.CoreCompileInputs.cache
 D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.exe
 D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.pdb
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Debug\Fitness App.exe.config
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Debug\Fitness App.exe
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\bin\Debug\Fitness App.pdb
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.cache
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Debug\Fitness App.exe
+C:\Users\комп\Desktop\Fitness_app-2feb12aba3ee35379f061418172006ff5da8ad4f\Fitness App\obj\Debug\Fitness App.pdb

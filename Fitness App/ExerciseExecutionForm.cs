@@ -54,20 +54,6 @@ namespace Fitness_App
             Grid.SetColumnSpan(Quantity, 2);
             Grid.SetRow(Quantity, 1);
 
-            Button Previous = new Button();
-            grid.RowDefinitions.Add(new RowDefinition());
-            Previous.Content = "Previous";
-            grid.Children.Add(Previous);
-            Grid.SetColumn(Previous, 0);
-            Grid.SetRow(Previous, 2);
-
-            Button Next = new Button();
-            grid.RowDefinitions.Add(new RowDefinition());
-            Next.Content = "Next";
-            grid.Children.Add(Next);
-            Grid.SetColumn( Next, 1);
-            Grid.SetRow(Next, 2);
-
             return grid;
         }
 
@@ -136,6 +122,11 @@ namespace Fitness_App
                 if (Result == MessageBoxResult.No)
                 {
                     new ComplexesForm(Methods.SynthesizeComplexes());
+                    Application.Current.Windows[0].Close();
+                }
+                else
+                {
+                    (new ComplexesForm(Methods.SynthesizeComplexes())).Show();
                     Application.Current.Windows[0].Close();
                 }
             }
