@@ -14,6 +14,7 @@ namespace Fitness_App
         bool MeasuredInTimes;
         string Type;
         int ComplexIndex;
+        string Part;
 
         public Exercise Result { get; private set; }
 
@@ -60,6 +61,13 @@ namespace Fitness_App
             Grid.SetColumn(MeasureLabel, 0);
             Grid.SetRow(MeasureLabel, 3);
 
+            Label PartLabel = new Label();
+            PartLabel.Content = "Part: ";
+            grid.Children.Add(PartLabel);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(PartLabel, 0);
+            Grid.SetRow(PartLabel, 4);
+
             #endregion
 
             #region TextBoxes
@@ -87,6 +95,12 @@ namespace Fitness_App
             grid.Children.Add(MeasureBox);
             Grid.SetColumn(MeasureBox, 1);
             Grid.SetRow(MeasureBox, 3);
+
+            TextBox PartBox = new TextBox();
+            PartBox.TextChanged += PartOnChange;
+            grid.Children.Add(PartBox);
+            Grid.SetColumn(PartBox, 1);
+            Grid.SetRow(PartBox, 4);
             #endregion
 
             Button Send = new Button();
@@ -94,14 +108,14 @@ namespace Fitness_App
             grid.RowDefinitions.Add(new RowDefinition());
             Send.Click += SendOnClick;
             grid.Children.Add(Send);
-            Grid.SetRow(Send, 4);
+            Grid.SetRow(Send, 5);
             Grid.SetColumn(Send, 0);
 
             Button Return = new Button();
             Return.Content = "Return";
             Return.Click += ReturnOnClick;
             grid.Children.Add(Return);
-            Grid.SetRow(Return, 4);
+            Grid.SetRow(Return, 5);
             Grid.SetColumn(Return, 1);
 
             Show();
@@ -121,6 +135,12 @@ namespace Fitness_App
         {
             Grid grid = this.Content as Grid;
             Type = (grid.Children[4] as TextBox).Text;
+        }
+
+        public void PartOnChange(object Sender, TextChangedEventArgs Args)
+        {
+            Grid grid = this.Content as Grid;
+            Part = (grid.Children[9] as TextBox).Text;
         }
 
         public void NameOnChange(object Sender, TextChangedEventArgs Args)

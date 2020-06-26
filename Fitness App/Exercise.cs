@@ -15,12 +15,12 @@ namespace Fitness_App
         [DataMember]
         public string Type { get; private set; }
 
-        public Exercise(string Type ,string Name, int NumberOfTimes, bool MeasuredInTimes)
+        public Exercise(string type ,string name, int NumberOfTimes, bool measuredInTimes)
         {
-            this.Name = Name;
-            this.Quantity = NumberOfTimes;
-            this.MeasuredInTimes = MeasuredInTimes;
-            this.Type = Type;
+            Name = name;
+            Quantity = NumberOfTimes;
+            MeasuredInTimes = measuredInTimes;
+            Type = type;
         }
         public void ChangeQuantity(int NewNumberOfTimes)
         {

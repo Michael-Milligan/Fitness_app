@@ -11,6 +11,8 @@ namespace Fitness_App
         [STAThread]
         static void Main()
         {
+            //Sorting the exercises
+            Methods.RewriteExercises(Methods.SynthesizeComplexes());
             new Application().Run(new MainWindow());
         }
 
