@@ -17,6 +17,7 @@ namespace Fitness_App
         Exercise CurrentExercise;
         int ExerciseIndex;
         SoundPlayer Player = new SoundPlayer("Whistle.wav");
+        bool IsPause = false;
 
         public ExerciseExecutionForm(ExerciseComplex Complex)
         {
@@ -50,61 +51,62 @@ namespace Fitness_App
             grid.RowDefinitions.Add(new RowDefinition());
             Quantity.Content = exercise.Quantity;
             Quantity.HorizontalContentAlignment = HorizontalAlignment.Center;
+            Quantity.VerticalAlignment = VerticalAlignment.Center;
             grid.Children.Add(Quantity);
             Grid.SetColumnSpan(Quantity, 2);
             Grid.SetRow(Quantity, 1);
+
+            grid.RowDefinitions.Add(new RowDefinition());
+            Button Previous = new Button();
+            Previous.Content = "Previous";
+            Previous.HorizontalContentAlignment = HorizontalAlignment.Center;
+            grid.Children.Add(Previous);
+            Grid.SetColumn(Previous, 0);
+            Grid.SetRow(Previous, 2);
+            Previous.Click += PreviousOnClick;
+
+            Button Next = new Button();
+            Next.Content = "Next";
+            Next.HorizontalContentAlignment = HorizontalAlignment.Center;
+            grid.Children.Add(Next);
+            Grid.SetColumn(Next, 1);
+            Grid.SetRow(Next, 2);
+            Next.Click += NextOnClick;
 
             return grid;
         }
 
         public void QuantityOnTick(object Sender, EventArgs Args)
         {
-            if (!CurrentExercise.MeasuredInTimes)
+            if (!IsPause)
+            {
+                if (!CurrentExercise.MeasuredInTimes)
+                {
+                    Quantity.Content = (int)Quantity.Content - 1;
+                }
+                if ((int)Quantity.Content == 0)
+                {
+                    Player.Play();
+                    MakeAPause();
+                }
+            }
+            else
             {
                 Quantity.Content = (int)Quantity.Content - 1;
-            }
-            if ((int)Quantity.Content == 0)
-            {
-                Player.Play();
-                Timer.Stop();
-                MakeAPause();
+                if ((int)Quantity.Content == 0)
+                {
+                    Player.Play();
+                    NextExercise();
+                    IsPause = false;
+                }
             }
         }
+
         public void MakeAPause()
         {
-            StackPanel Panel = new StackPanel();
-
-            Label Message = new Label();
-            Message.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Message.Content = "Rest! The remaining time:";
-            Panel.Children.Add(Message);
-
-            Label Time = new Label();
-            Time.Content = 2;
-            Time.HorizontalContentAlignment = HorizontalAlignment.Center;
-            Panel.Children.Add(Time);
-
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 0, 1),
-                DispatcherPriority.Normal, 
-                TimerOnTick, 
-                Dispatcher.CurrentDispatcher);
-            Application.Current.Windows[0].Content = Panel;
-        }
-
-        public void TimerOnTick(object Time, EventArgs Args)
-        {
-            Label LocalTime = new Label();
-
-            LocalTime.Content = 
-                (int)(((Application.Current.Windows[0].Content as StackPanel).Children[1] as Label).Content) - 1;
-            ((Application.Current.Windows[0].Content as StackPanel).Children[1] as Label).Content = LocalTime.Content;
-            if ((int)LocalTime.Content == 0)
-            { 
-                Player.Play();
-                NextExercise();
-                Timer.Start();
-                (Time as DispatcherTimer).Stop();
-            }
+            NameLabel.Content = "Rest! The remaining time:";
+            Quantity.Content = 2;
+            IsPause = true;
         }
 
         public void NextExercise()
@@ -113,10 +115,10 @@ namespace Fitness_App
             {
                 CurrentExercise = new Exercise(Complex.Exercises[++ExerciseIndex]);
                 Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
-                Timer.Start();
             }
             catch (ArgumentOutOfRangeException)
             {
+                Timer.Stop();
                 MessageBox.Show("The complex was done! Congrats!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
                 MessageBoxResult Result = MessageBox.Show("Would you like to return to the Complexes page?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (Result == MessageBoxResult.No)
@@ -131,6 +133,18 @@ namespace Fitness_App
                 }
             }
         }
-                
+
+        public void NextOnClick(object Sender, RoutedEventArgs Args) => MakeAPause();
+
+        public void PreviousOnClick(object Sender, RoutedEventArgs Args)
+        {
+            try
+            {
+                CurrentExercise = new Exercise(Complex.Exercises[--ExerciseIndex]);
+                Application.Current.Windows[0].Content = BuildExercise(CurrentExercise);
+            }
+            catch (ArgumentOutOfRangeException) { }
+            if (IsPause) IsPause = false;
+        }
     }
 }
