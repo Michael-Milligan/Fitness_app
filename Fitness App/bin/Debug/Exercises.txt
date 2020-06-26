@@ -1,5 +1,0 @@
-Breast_Advanced Main_Part Jamping_Jacks 2 False
-Breast_Advanced Main_Part Push_Ups 2 False
-Breast_Advanced Stretching Hindu_Push_Ups 2 False
-Legs_Advanced Main_Part Burpies 5 True
-Legs_Advanced Stretching Hello 5 True

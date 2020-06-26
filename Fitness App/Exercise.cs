@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Fitness_App
 {
+    [DataContract]
     public class Exercise
     {
+        [DataMember]
         public string Name { get; private set; }
+        [DataMember]
         public int Quantity { get; private set; }
+        [DataMember]
         public bool MeasuredInTimes { get; private set; }
+        [DataMember]
         public string Type { get; private set; }
 
         public Exercise(string Type ,string Name, int NumberOfTimes, bool MeasuredInTimes)

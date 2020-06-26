@@ -1,14 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Fitness_App
 {
+    [DataContract]
     public class ExerciseComplex
     {
+        [DataMember]
         public List<Exercise> Exercises { get; set; }
 
-        public string MuscleGroup { get;}
+        [DataMember]
+        public string MuscleGroup { get; set; }
 
         public ExerciseComplex(string MuscleGroup)
         {
