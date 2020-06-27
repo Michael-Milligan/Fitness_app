@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Media;
+using System.Windows.Media.Imaging;
 
 namespace Fitness_App
 {
@@ -16,8 +16,9 @@ namespace Fitness_App
         Label NameLabel;
         Exercise CurrentExercise;
         int ExerciseIndex;
-        SoundPlayer Player = new SoundPlayer("Whistle.wav");
+        SoundPlayer Player = new SoundPlayer(@"..\Release\src\Whistle.wav");
         bool IsPause = false;
+        Image image;
 
         public ExerciseExecutionForm(ExerciseComplex Complex)
         {
@@ -45,6 +46,21 @@ namespace Fitness_App
             Grid.SetColumnSpan(NameLabel, 2);
             Grid.SetRow(NameLabel, 0);
 
+            #region Picture
+            grid.RowDefinitions.Add(new RowDefinition());
+            try
+            {
+            Uri uri = new Uri(exercise.PathToPicture, UriKind.RelativeOrAbsolute);
+            BitmapImage bit = new BitmapImage(uri);
+            image = new Image();
+            image.Source = bit;
+            grid.Children.Add(image);
+            Grid.SetColumnSpan(image, 2);
+            Grid.SetRow(image, 1);
+            }
+            catch (Exception) { }
+            #endregion
+
             Quantity = new Label();
             grid.RowDefinitions.Add(new RowDefinition());
             Quantity.Content = exercise.Quantity;
@@ -52,7 +68,7 @@ namespace Fitness_App
             Quantity.VerticalAlignment = VerticalAlignment.Center;
             grid.Children.Add(Quantity);
             Grid.SetColumnSpan(Quantity, 2);
-            Grid.SetRow(Quantity, 1);
+            Grid.SetRow(Quantity, 2);
 
             grid.RowDefinitions.Add(new RowDefinition());
             Button Previous = new Button();
@@ -60,7 +76,7 @@ namespace Fitness_App
             Previous.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Previous);
             Grid.SetColumn(Previous, 0);
-            Grid.SetRow(Previous, 2);
+            Grid.SetRow(Previous, 3);
             Previous.Click += PreviousOnClick;
 
             Button Next = new Button();
@@ -68,7 +84,7 @@ namespace Fitness_App
             Next.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Next);
             Grid.SetColumn(Next, 1);
-            Grid.SetRow(Next, 2);
+            Grid.SetRow(Next, 3);
             Next.Click += NextOnClick;
 
             return grid;
@@ -104,6 +120,8 @@ namespace Fitness_App
         {
             NameLabel.Content = "Rest! The remaining time:";
             Quantity.Content = 2;
+            var grid = Application.Current.Windows[0].Content as Grid;
+            grid.Children.Remove(image);
             IsPause = true;
         }
 
@@ -118,11 +136,10 @@ namespace Fitness_App
             {
                 Timer.Stop();
                 MessageBox.Show("The complex was done! Congrats!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
-                MessageBoxResult Result = MessageBox.Show("Would you like to return to the Complexes page?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult Result = MessageBox.Show("Question", "Would you like to return to the Complexes page?", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (Result == MessageBoxResult.No)
                 {
-                    new ComplexesForm(Methods.SynthesizeComplexes());
-                    Application.Current.Windows[0].Close();
+                    Application.Current.Shutdown();
                 }
                 else
                 {

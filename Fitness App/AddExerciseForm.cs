@@ -14,7 +14,7 @@ namespace Fitness_App
         bool MeasuredInTimes;
         string Type;
         int ComplexIndex;
-        string Part;
+        string Path;
 
         public Exercise Result { get; private set; }
 
@@ -61,6 +61,13 @@ namespace Fitness_App
             Grid.SetColumn(MeasureLabel, 0);
             Grid.SetRow(MeasureLabel, 3);
 
+            Label PathLabel = new Label();
+            PathLabel.Content = "Name of file with extension: ";
+            grid.Children.Add(PathLabel);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(PathLabel, 0);
+            Grid.SetRow(PathLabel, 4);
+
             #endregion
 
             #region TextBoxes
@@ -88,6 +95,12 @@ namespace Fitness_App
             grid.Children.Add(MeasureBox);
             Grid.SetColumn(MeasureBox, 1);
             Grid.SetRow(MeasureBox, 3);
+
+            TextBox PathBox = new TextBox();
+            PathBox.TextChanged += PathOnChange;
+            grid.Children.Add(PathBox);
+            Grid.SetColumn(PathBox, 1);
+            Grid.SetRow(PathBox, 4);
             #endregion
 
             #region Buttons
@@ -116,30 +129,38 @@ namespace Fitness_App
         public void TypeOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            Type = (grid.Children[4] as TextBox).Text;
+            Type = (grid.Children[5] as TextBox).Text;
         }
 
         public void NameOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            ExerciseName = (grid.Children[5] as TextBox).Text;
+            ExerciseName = (grid.Children[6] as TextBox).Text;
         }
 
         public void QuantityOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = Content as Grid;
-            Quantity = Convert.ToInt32((grid.Children[6] as TextBox).Text);
+            Quantity = Convert.ToInt32((grid.Children[7] as TextBox).Text);
         }
 
         public void MeasureOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = Content as Grid;
-            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[7] as TextBox).Text));
-        }     
+            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[8] as TextBox).Text));
+        }
+
+        public void PathOnChange(object Sender, TextChangedEventArgs Args)
+        {
+            Grid grid = Content as Grid;
+            Path = (grid.Children[9] as TextBox).Text;
+        }
+
         public void SendOnClick(object Sender, RoutedEventArgs Args)
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ComplexIndex].AddExercise(new Exercise(Type, ExerciseName, Quantity, MeasuredInTimes));
+            Result[ComplexIndex].AddExercise(new Exercise(Type, ExerciseName, Quantity, MeasuredInTimes, 
+                $@"..\Release\src\img\{Path}"));
             Methods.RewriteExercises(Result);
 
             new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 

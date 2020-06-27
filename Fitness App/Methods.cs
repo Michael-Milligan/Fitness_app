@@ -9,10 +9,12 @@ namespace Fitness_App
 {
     public class Methods
     {
+        static string Path = @"..\Release\src\Exercises.json";
         public static void RewriteExercises(ExerciseComplex[] ComplexesData)
         {
+
             var json = new DataContractJsonSerializer(typeof(ExerciseComplex[]));
-            using (var file = new FileStream("Exercises.json", FileMode.OpenOrCreate))
+            using (var file = new FileStream(Path, FileMode.Create))
             {
                 json.WriteObject(file, ComplexesData);
             }
@@ -22,7 +24,7 @@ namespace Fitness_App
         {
             var json = new DataContractJsonSerializer(typeof(ExerciseComplex[]));
             ExerciseComplex[] Results;
-            using (var file = new FileStream("Exercises.json", FileMode.OpenOrCreate))
+            using (var file = new FileStream(Path, FileMode.OpenOrCreate))
             {
                 Results = json.ReadObject(file) as ExerciseComplex[];
             }

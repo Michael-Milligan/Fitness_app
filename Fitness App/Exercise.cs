@@ -14,13 +14,16 @@ namespace Fitness_App
         public bool MeasuredInTimes { get; private set; }
         [DataMember]
         public string Type { get; private set; }
+        [DataMember]
+        public string PathToPicture { get; private set; }
 
-        public Exercise(string type ,string name, int NumberOfTimes, bool measuredInTimes)
+        public Exercise(string type ,string name, int NumberOfTimes, bool measuredInTimes, string path)
         {
             Name = name;
             Quantity = NumberOfTimes;
             MeasuredInTimes = measuredInTimes;
             Type = type;
+            PathToPicture = path;
         }
         public void ChangeQuantity(int NewNumberOfTimes)
         {
