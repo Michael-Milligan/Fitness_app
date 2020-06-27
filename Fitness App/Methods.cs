@@ -11,14 +11,6 @@ namespace Fitness_App
     {
         public static void RewriteExercises(ExerciseComplex[] ComplexesData)
         {
-            ComplexesData = ComplexesData.OrderBy(item => item.MuscleGroup).ToArray();
-            foreach (var Complex in ComplexesData)
-            {
-                Complex.Exercises = Complex.Exercises.
-                    OrderBy(item => item.Type).
-                    ToList();
-            }
-
             var json = new DataContractJsonSerializer(typeof(ExerciseComplex[]));
             using (var file = new FileStream("Exercises.json", FileMode.OpenOrCreate))
             {

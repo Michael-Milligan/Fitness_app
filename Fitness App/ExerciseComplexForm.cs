@@ -31,7 +31,7 @@ namespace Fitness_App
 
                 #region Up
                 Button Up = new Button();
-                Up.Content = "^";
+                Up.Content = "↑";
                 Up.Tag = i;
                 Up.Click += UpOnClick;
 
@@ -51,7 +51,7 @@ namespace Fitness_App
 
                 #region Down
                 Button Down = new Button();
-                Down.Content = "";
+                Down.Content = "↓";
                 Down.Tag = i;
                 Down.Click += DownOnClick;
 

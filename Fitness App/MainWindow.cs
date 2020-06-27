@@ -58,7 +58,7 @@ namespace Fitness_App
                 "Do you really want to quit?",
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
-            if (Result == MessageBoxResult.Yes) Application.Current.Windows[0].Close();
+            if (Result == MessageBoxResult.Yes) Application.Current.Shutdown();
         }
     }
 }
