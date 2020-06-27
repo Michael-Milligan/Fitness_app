@@ -23,8 +23,6 @@ namespace Fitness_App
         {
             this.Complex = new ExerciseComplex(Complex.MuscleGroup);
             this.Complex.Exercises = Complex.Exercises.Where(item => item == item).ToList();
-            this.Complex.Exercises = this.Complex.Exercises.OrderBy(exercise => exercise.Type).
-                ThenBy(exercise => exercise.Name).ToList();
             Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, QuantityOnTick, Dispatcher.CurrentDispatcher);
             Title = this.Complex.MuscleGroup + " Complex";
 
