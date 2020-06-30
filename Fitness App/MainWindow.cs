@@ -54,8 +54,8 @@ namespace Fitness_App
         public void ExitOnClick(object Sender, RoutedEventArgs Args)
         {
             MessageBoxResult Result = 
-                MessageBox.Show("Question", 
-                "Do you really want to quit?",
+                MessageBox.Show("Do you really want to quit?", 
+                "Question",
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes) Application.Current.Shutdown();

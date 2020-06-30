@@ -16,7 +16,7 @@ namespace Fitness_App
         Label NameLabel;
         Exercise CurrentExercise;
         int ExerciseIndex;
-        SoundPlayer Player = new SoundPlayer(@"..\Release\src\Whistle.wav");
+        SoundPlayer Player = new SoundPlayer(@"src\Whistle.wav");
         bool IsPause = false;
         Image image;
 

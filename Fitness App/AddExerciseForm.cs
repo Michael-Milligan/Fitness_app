@@ -160,7 +160,7 @@ namespace Fitness_App
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
             Result[ComplexIndex].AddExercise(new Exercise(Type, ExerciseName, Quantity, MeasuredInTimes, 
-                $@"..\Release\src\img\{Path}"));
+                $@"src\img\{Path}"));
             Methods.RewriteExercises(Result);
 
             new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 

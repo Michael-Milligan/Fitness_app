@@ -9,7 +9,7 @@ namespace Fitness_App
 {
     public class Methods
     {
-        static string Path = @"..\Release\src\Exercises.json";
+        static string Path = @"src\Exercises.json";
         public static void RewriteExercises(ExerciseComplex[] ComplexesData)
         {
 
