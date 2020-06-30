@@ -10,15 +10,17 @@ namespace Fitness_App
         int ComplexIndex { get; }
         public ExerciseComplexForm(string Title, ExerciseComplex ComplexArgument, int ComplexIndex)
         {
+            ScrollViewer Scroll = new ScrollViewer();
+            Scroll.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
             this.ComplexIndex = ComplexIndex;
             this.Title = Title;
             Grid grid = new Grid();
             grid.HorizontalAlignment = HorizontalAlignment.Center;
 
-            for (int i = 0; i < 7; ++i)
+            for (int i = 0; i < 9; ++i)
             {
                 ColumnDefinition Column = new ColumnDefinition();
-                if (i != 1) Column.Width = new GridLength(150, GridUnitType.Pixel);
+                if (i != 2) Column.Width = new GridLength(150, GridUnitType.Pixel);
                 else Column.Width = new GridLength(500, GridUnitType.Pixel);
                 grid.ColumnDefinitions.Add(Column);
             }
@@ -29,6 +31,15 @@ namespace Fitness_App
                 Row.Height = new GridLength(50, GridUnitType.Pixel);
                 grid.RowDefinitions.Add(Row);
 
+                #region Type
+                Button Type = new Button();
+                Type.Content = ComplexArgument.Exercises[i].Type;
+
+                grid.Children.Add(Type);
+                Grid.SetRow(Type, i);
+                Grid.SetColumn(Type, 0);
+                #endregion
+
                 #region Up
                 Button Up = new Button();
                 Up.Content = "↑";
@@ -37,7 +48,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Up);
                 Grid.SetRow(Up, i);
-                Grid.SetColumn(Up, 0);
+                Grid.SetColumn(Up, 1);
                 #endregion
 
                 #region Name
@@ -46,7 +57,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Name);
                 Grid.SetRow(Name, i);
-                Grid.SetColumn(Name, 1);
+                Grid.SetColumn(Name, 2);
                 #endregion
 
                 #region Down
@@ -57,7 +68,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Down);
                 Grid.SetRow(Down, i);
-                Grid.SetColumn(Down, 2);
+                Grid.SetColumn(Down, 3);
                 #endregion
 
                 #region Plus
@@ -68,7 +79,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Plus);
                 Grid.SetRow(Plus, i);
-                Grid.SetColumn(Plus, 3);
+                Grid.SetColumn(Plus, 4);
                 #endregion
 
                 #region Number
@@ -77,7 +88,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Number);
                 Grid.SetRow(Number, i);
-                Grid.SetColumn(Number, 4);
+                Grid.SetColumn(Number, 5);
                 #endregion
 
                 #region Minus
@@ -88,7 +99,7 @@ namespace Fitness_App
 
                 grid.Children.Add(Minus);
                 Grid.SetRow(Minus, i);
-                Grid.SetColumn(Minus, 5);
+                Grid.SetColumn(Minus, 6);
                 #endregion
 
                 #region Remove
@@ -99,9 +110,10 @@ namespace Fitness_App
 
                 grid.Children.Add(Remove);
                 Grid.SetRow(Remove, i);
-                Grid.SetColumn(Remove, 6);
+                Grid.SetColumn(Remove, 7);
                 #endregion
             }
+
 
             #region Add
             RowDefinition RowAdd = new RowDefinition();
@@ -115,7 +127,7 @@ namespace Fitness_App
             grid.Children.Add(Add);
             
             Grid.SetRow(Add, ComplexArgument.Exercises.Count);
-            Grid.SetColumnSpan(Add, 7);
+            Grid.SetColumnSpan(Add, 8);
             #endregion
 
             #region Return
@@ -130,10 +142,11 @@ namespace Fitness_App
             grid.Children.Add(Return);
 
             Grid.SetRow(Return, ComplexArgument.Exercises.Count + 1);
-            Grid.SetColumnSpan(Return, 7);
+            Grid.SetColumnSpan(Return, 8);
             #endregion
+            Scroll.Content = grid;
 
-            Content = grid;
+            Content = Scroll;
             Focus();
         }
 

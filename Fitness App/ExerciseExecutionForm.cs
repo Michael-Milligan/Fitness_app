@@ -119,7 +119,7 @@ namespace Fitness_App
         public void MakeAPause()
         {
             NameLabel.Content = "Rest! The remaining time:";
-            Quantity.Content = 2;
+            Quantity.Content = 15;
             var grid = Application.Current.Windows[0].Content as Grid;
             grid.Children.Remove(image);
             IsPause = true;
@@ -149,7 +149,11 @@ namespace Fitness_App
             }
         }
 
-        public void NextOnClick(object Sender, RoutedEventArgs Args) => MakeAPause();
+        public void NextOnClick(object Sender, RoutedEventArgs Args)
+        {
+            if (IsPause) NextExercise();
+            else MakeAPause();
+        }
 
         public void PreviousOnClick(object Sender, RoutedEventArgs Args)
         {
