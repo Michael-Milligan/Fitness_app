@@ -238,7 +238,7 @@ namespace Fitness_App
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
 
             AddExerciseForm Form = new AddExerciseForm(ComplexIndex);
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = Form.Content;
         }
 
         public void RemoveOnClick(object Sender, RoutedEventArgs Args)
@@ -257,8 +257,7 @@ namespace Fitness_App
         public void ReturnOnClick(object Sender, RoutedEventArgs Args)
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            new ComplexesForm(Result).Show();
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = new ComplexesForm(Result).Content;
         }
     }
 }

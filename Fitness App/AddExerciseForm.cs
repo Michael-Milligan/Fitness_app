@@ -120,7 +120,6 @@ namespace Fitness_App
             Grid.SetColumn(Return, 1);
             #endregion
             
-            Show();
             Content = grid;
         }
 
@@ -163,21 +162,19 @@ namespace Fitness_App
                 $@"src\img\{Path}"));
             Methods.RewriteExercises(Result);
 
-            new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 
-                Result[ComplexIndex], 
-                ComplexIndex).
-                    Show();
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                Result[ComplexIndex],
+                ComplexIndex).Content;
         }
 
         public void ReturnOnClick(object Sender, RoutedEventArgs Args)
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
-                Result[ComplexIndex],
-                ComplexIndex).
+            
                     Show();
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
+                Result[ComplexIndex],
+                ComplexIndex).Content;
         }
         #endregion
     }

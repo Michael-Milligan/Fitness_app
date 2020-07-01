@@ -11,8 +11,6 @@ namespace Fitness_App
         [STAThread]
         static void Main()
         {
-            //Sorting the exercises
-            Methods.RewriteExercises(Methods.SynthesizeComplexes());
             new Application().Run(new MainWindow());
         }
 
@@ -46,9 +44,7 @@ namespace Fitness_App
         public void ProceedToCopmlexes(object Sender, RoutedEventArgs Args)
         {
             ComplexesForm Form = new ComplexesForm(Methods.SynthesizeComplexes());
-            Form.Show();
-            Application.Current.MainWindow = Form;
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = Form.Content;
         }
 
         public void ExitOnClick(object Sender, RoutedEventArgs Args)

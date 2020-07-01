@@ -143,8 +143,7 @@ namespace Fitness_App
                 }
                 else
                 {
-                    (new ComplexesForm(Methods.SynthesizeComplexes())).Show();
-                    Application.Current.Windows[0].Close();
+                    Application.Current.Windows[0].Content = (new ComplexesForm(Methods.SynthesizeComplexes())).Content;
                 }
             }
             if (IsPause) IsPause = false;

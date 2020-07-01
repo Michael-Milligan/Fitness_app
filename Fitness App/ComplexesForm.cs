@@ -58,9 +58,7 @@ namespace Fitness_App
             ExerciseComplexForm Form = new ExerciseComplexForm(Complexes[(int)button.Tag].MuscleGroup, 
                 Complexes[(int)button.Tag],
                 (int)button.Tag);
-            Form.Show();
-            Application.Current.MainWindow = Form;
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = Form.Content;
         }
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
@@ -72,15 +70,13 @@ namespace Fitness_App
             if (Result == MessageBoxResult.Yes)
             {
                 Button button = Sender as Button;
-                new ExerciseExecutionForm(Complexes[(int)button.Tag]).Show();
-                Application.Current.Windows[0].Close();
+                Application.Current.Windows[0].Content = new ExerciseExecutionForm(Complexes[(int)button.Tag]).Content;
             }
         }
 
         public void ExitOnClick(object Sender, RoutedEventArgs Args)
         {
-            new MainWindow().Show();
-            Application.Current.Windows[0].Close();
+            Application.Current.Windows[0].Content = new MainWindow().Content;
         }
     }
 }
