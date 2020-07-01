@@ -15,7 +15,6 @@ D:\GitHub\Fitness_app\Fitness App\bin\Release\Fitness App.pdb
 D:\GitHub\Fitness_app\Fitness App\obj\Release\Fitness App.csproj.CoreCompileInputs.cache
 D:\GitHub\Fitness_app\Fitness App\obj\Release\Fitness App.exe
 D:\GitHub\Fitness_app\Fitness App\obj\Release\Fitness App.pdb
-D:\GitHub\Fitness_app\Fitness App\obj\Release\Fitness App.csprojAssemblyReference.cache
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\SetLocale.g.cs
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\Fitness App_MarkupCompile.cache
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\Fitness App_MarkupCompile.lref
