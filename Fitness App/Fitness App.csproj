@@ -57,6 +57,7 @@
     <Compile Include="ExerciseComplex.cs" />
     <Compile Include="ExerciseComplexForm.cs" />
     <Compile Include="ExerciseExecutionForm.cs" />
+    <Compile Include="Info.cs" />
     <Compile Include="Locale.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Methods.cs" />

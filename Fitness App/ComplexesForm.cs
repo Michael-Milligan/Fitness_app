@@ -9,7 +9,7 @@ namespace Fitness_App
         public ComplexesForm(ExerciseComplex[] Complexes)
         {
             this.Complexes = Complexes;
-            Title = "Комплексы упражнений:";
+            Title = Info.locale.ComplexesFormText[0];
             Grid Panel = new Grid();
             Button[] Buttons = new Button[Complexes.Length];
 
@@ -34,7 +34,7 @@ namespace Fitness_App
 
                 Edit[i] = new Button();
                 Edit[i].Tag = i;
-                Edit[i].Content = "Изменить";
+                Edit[i].Content = Info.locale.ComplexesFormText[1];
                 Edit[i].Click += EditOnClick;
                 Panel.Children.Add(Edit[i]);
                 Grid.SetColumn(Edit[i], 1);
@@ -43,7 +43,7 @@ namespace Fitness_App
 
             Button Return = new Button();
             Panel.RowDefinitions.Add(new RowDefinition());
-            Return.Content = "Назад";
+            Return.Content = Info.locale.ComplexesFormText[2];
             Return.Click += ExitOnClick;
             Panel.Children.Add(Return);
             Grid.SetRow(Return, Buttons.Length);
@@ -63,8 +63,8 @@ namespace Fitness_App
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
         {
-            MessageBoxResult Result = MessageBox.Show("Вы готовы приступить к выполнению?", 
-                "Вопрос:", 
+            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[3],
+                Info.locale.ComplexesFormText[4], 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)

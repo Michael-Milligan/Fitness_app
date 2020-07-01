@@ -20,7 +20,7 @@ namespace Fitness_App
 
         public AddExerciseForm(int ComplexIndex)
         {
-            Title = "Добавление упражнения:";
+            Title = Info.locale.AddExerciseFormText[0];
             Width = 500;
             Height = 300;
             this.ComplexIndex = ComplexIndex;
@@ -34,35 +34,35 @@ namespace Fitness_App
 
 
             Label TypeLabel = new Label();
-            TypeLabel.Content = "Часть: ";
+            TypeLabel.Content = Info.locale.AddExerciseFormText[1];
             grid.Children.Add(TypeLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(TypeLabel, 0);
             Grid.SetRow(TypeLabel, 0);
 
             Label NameLabel = new Label();
-            NameLabel.Content = "Название: ";
+            NameLabel.Content = Info.locale.AddExerciseFormText[2];
             grid.Children.Add(NameLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(NameLabel, 0);
             Grid.SetRow(NameLabel, 1);
 
             Label QuantityLabel = new Label();
-            QuantityLabel.Content = "Кол-во упражнений: ";
+            QuantityLabel.Content = Info.locale.AddExerciseFormText[3];
             grid.Children.Add(QuantityLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(QuantityLabel, 0);
             Grid.SetRow(QuantityLabel, 2);
 
             Label MeasureLabel = new Label();
-            MeasureLabel.Content = "Оно измеряется в количестве раз?(1/0): ";
+            MeasureLabel.Content = Info.locale.AddExerciseFormText[4];
             grid.Children.Add(MeasureLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(MeasureLabel, 0);
             Grid.SetRow(MeasureLabel, 3);
 
             Label PathLabel = new Label();
-            PathLabel.Content = "Имя файла с расширением: ";
+            PathLabel.Content = Info.locale.AddExerciseFormText[5];
             grid.Children.Add(PathLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(PathLabel, 0);
@@ -105,7 +105,7 @@ namespace Fitness_App
 
             #region Buttons
             Button Send = new Button();
-            Send.Content = "Отправить";
+            Send.Content = Info.locale.AddExerciseFormText[6];
             grid.RowDefinitions.Add(new RowDefinition());
             Send.Click += SendOnClick;
             grid.Children.Add(Send);
@@ -113,7 +113,7 @@ namespace Fitness_App
             Grid.SetColumn(Send, 0);
 
             Button Return = new Button();
-            Return.Content = "Назад";
+            Return.Content = Info.locale.AddExerciseFormText[7];
             Return.Click += ReturnOnClick;
             grid.Children.Add(Return);
             Grid.SetRow(Return, 5);

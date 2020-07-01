@@ -42,16 +42,18 @@ namespace Fitness_App
 
         public void enOnClick(object Sender, RoutedEventArgs Args)
         {
-            var Form = new MainWindow() {locale = new Locale() {Type = "en"}};
-            Form.locale.GenerateText();
+            var Form = new MainWindow();
+            Info.locale = new Locale() { Type = "en" };
+            Info.locale.GenerateText();
             Form.RefreshWindow();
             Application.Current.Windows[0].Content = Form.Content;
         }
 
         public void ruOnClick(object Sender, RoutedEventArgs Args)
         {
-            var Form = new MainWindow() { locale = new Locale() {Type = "ru"} };
-            Form.locale.GenerateText();
+            var Form = new MainWindow();
+            Info.locale = new Locale() { Type = "ru" };
+            Info.locale.GenerateText();
             Form.RefreshWindow();
             Application.Current.Windows[0].Content = Form.Content;
         }

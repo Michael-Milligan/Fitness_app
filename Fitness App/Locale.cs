@@ -34,7 +34,9 @@ namespace Fitness_App
             AddExerciseFormText = locale.AddExerciseFormText;
             ComplexesFormText = locale.ComplexesFormText;
             ExerciseExecutionFormText = locale.ExerciseExecutionFormText;
-        }
+        } 
+        //For adding languages
+        /*
         public void SetText()
         {
             var json = new DataContractJsonSerializer(typeof(Locale));
@@ -44,8 +46,7 @@ namespace Fitness_App
                 json.WriteObject(file, this);
             }
         }
-        //For adding languages
-        /*public Locale()
+       public Locale()
         {
             Type = "ru";
             MainWindowText = new string[] { "Фитнес", "Комплексы упражнений","Смена языка", "Выход", "Вы действительно хотите выйти?", "Вопрос:" };

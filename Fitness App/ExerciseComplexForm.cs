@@ -104,7 +104,7 @@ namespace Fitness_App
 
                 #region Remove
                 Button Remove = new Button();
-                Remove.Content = "Убрать";
+                Remove.Content = Info.locale.ExerciseComplexFormText[0];
                 Remove.Tag = i;
                 Remove.Click += RemoveOnClick;
 
@@ -121,7 +121,7 @@ namespace Fitness_App
             grid.RowDefinitions.Add(RowAdd);
 
             Button Add = new Button();
-            Add.Content = "Добавить";
+            Add.Content = Info.locale.ExerciseComplexFormText[1];
             Add.Click += AddOnClick;
 
             grid.Children.Add(Add);
@@ -136,7 +136,7 @@ namespace Fitness_App
             grid.RowDefinitions.Add(RowReturn);
 
             Button Return = new Button();
-            Return.Content = "Назад";
+            Return.Content = Info.locale.ExerciseComplexFormText[2];
             Return.Click += ReturnOnClick;
 
             grid.Children.Add(Return);

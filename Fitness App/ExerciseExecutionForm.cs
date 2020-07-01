@@ -25,7 +25,7 @@ namespace Fitness_App
             this.Complex = new ExerciseComplex(Complex.MuscleGroup);
             this.Complex.Exercises = Complex.Exercises.Where(item => item == item).ToList();
             Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, QuantityOnTick, Dispatcher.CurrentDispatcher);
-            Title = "Комплекс:" + this.Complex.MuscleGroup;
+            Title = Info.locale.ExerciseExecutionFormText[0] + this.Complex.MuscleGroup;
 
             CurrentExercise = new Exercise(Complex.Exercises[0]);
             ExerciseIndex = this.Complex.Exercises.FindIndex(new Predicate<Exercise>(item => item == Complex.Exercises[0]));
@@ -72,7 +72,7 @@ namespace Fitness_App
 
             grid.RowDefinitions.Add(new RowDefinition());
             Button Previous = new Button();
-            Previous.Content = "Предыдущее";
+            Previous.Content = Info.locale.ExerciseExecutionFormText[1];
             Previous.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Previous);
             Grid.SetColumn(Previous, 0);
@@ -80,7 +80,7 @@ namespace Fitness_App
             Previous.Click += PreviousOnClick;
 
             Button Next = new Button();
-            Next.Content = "Следующее";
+            Next.Content = Info.locale.ExerciseExecutionFormText[2];
             Next.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Next);
             Grid.SetColumn(Next, 1);
@@ -118,7 +118,7 @@ namespace Fitness_App
 
         public void MakeAPause()
         {
-            NameLabel.Content = "Отдыхайте! Оставшееся время:";
+            NameLabel.Content = Info.locale.ExerciseExecutionFormText[3];
             Quantity.Content = 15;
             var grid = Application.Current.Windows[0].Content as Grid;
             grid.Children.Remove(image);
@@ -135,8 +135,8 @@ namespace Fitness_App
             catch (ArgumentOutOfRangeException)
             {
                 Timer.Stop();
-                MessageBox.Show("Комплекс выполнен! Поздравляю!", "Поздравления", MessageBoxButton.OK, MessageBoxImage.Information);
-                MessageBoxResult Result = MessageBox.Show("Хотите вернуться к экрану комплексов упражнений?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBox.Show(Info.locale.ExerciseExecutionFormText[4], Info.locale.ExerciseExecutionFormText[5], MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult Result = MessageBox.Show(Info.locale.ExerciseExecutionFormText[6], Info.locale.ExerciseExecutionFormText[7], MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (Result == MessageBoxResult.No)
                 {
                     Application.Current.Shutdown();
