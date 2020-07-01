@@ -41,7 +41,7 @@ namespace Fitness_App
             Grid.SetRow(TypeLabel, 0);
 
             Label NameLabel = new Label();
-            NameLabel.Content = "Имя: ";
+            NameLabel.Content = "Название: ";
             grid.Children.Add(NameLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(NameLabel, 0);
