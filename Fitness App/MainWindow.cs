@@ -6,7 +6,7 @@ namespace Fitness_App
 {
     class MainWindow : Window
     {
-        public static string Path = "Exercises.txt";
+        public Locale locale;
 
         [STAThread]
         static void Main()

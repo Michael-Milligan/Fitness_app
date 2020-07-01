@@ -4,11 +4,17 @@ using System.Runtime.Serialization;
 namespace Fitness_App
 {
     [DataContract]
-    class Locale
+    public class Locale
     {
         [DataMember]
-        string[] MainWindowText;
+        public string[] MainWindowText;
         [DataMember]
-        string[] ComplexExerciseFormText;
+        public string[] ComplexExerciseFormText;
+        public string Type;
+
+        public void GenerateText()
+        {
+
+        }
     }
 }

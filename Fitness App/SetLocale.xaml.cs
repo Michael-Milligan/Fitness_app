@@ -28,12 +28,13 @@ namespace Fitness_App
 
         private void RussianOnClick(object sender, MouseButtonEventArgs e)
         {
+            (Application.Current.Windows[0] as MainWindow).locale.Type = "ru";
 
         }
 
         private void EnglishOnClick(object sender, MouseButtonEventArgs e)
         {
-
+            (Application.Current.Windows[0] as MainWindow).locale.Type = "en";
         }
     }
 }
