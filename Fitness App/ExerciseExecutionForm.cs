@@ -25,7 +25,7 @@ namespace Fitness_App
             this.Complex = new ExerciseComplex(Complex.MuscleGroup);
             this.Complex.Exercises = Complex.Exercises.Where(item => item == item).ToList();
             Timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, QuantityOnTick, Dispatcher.CurrentDispatcher);
-            Title = this.Complex.MuscleGroup + " Complex";
+            Title = "Комплекс:" + this.Complex.MuscleGroup;
 
             CurrentExercise = new Exercise(Complex.Exercises[0]);
             ExerciseIndex = this.Complex.Exercises.FindIndex(new Predicate<Exercise>(item => item == Complex.Exercises[0]));
@@ -72,7 +72,7 @@ namespace Fitness_App
 
             grid.RowDefinitions.Add(new RowDefinition());
             Button Previous = new Button();
-            Previous.Content = "Previous";
+            Previous.Content = "Предыдущее";
             Previous.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Previous);
             Grid.SetColumn(Previous, 0);
@@ -80,7 +80,7 @@ namespace Fitness_App
             Previous.Click += PreviousOnClick;
 
             Button Next = new Button();
-            Next.Content = "Next";
+            Next.Content = "Следующее";
             Next.HorizontalContentAlignment = HorizontalAlignment.Center;
             grid.Children.Add(Next);
             Grid.SetColumn(Next, 1);
@@ -118,7 +118,7 @@ namespace Fitness_App
 
         public void MakeAPause()
         {
-            NameLabel.Content = "Rest! The remaining time:";
+            NameLabel.Content = "Отдыхайте! Оставшееся время:";
             Quantity.Content = 15;
             var grid = Application.Current.Windows[0].Content as Grid;
             grid.Children.Remove(image);
@@ -135,8 +135,8 @@ namespace Fitness_App
             catch (ArgumentOutOfRangeException)
             {
                 Timer.Stop();
-                MessageBox.Show("The complex was done! Congrats!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
-                MessageBoxResult Result = MessageBox.Show("Question", "Would you like to return to the Complexes page?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBox.Show("Комплекс выполнен! Поздравляю!", "Поздравления", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult Result = MessageBox.Show("Хотите вернуться к экрану комплексов упражнений?", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (Result == MessageBoxResult.No)
                 {
                     Application.Current.Shutdown();
@@ -147,6 +147,7 @@ namespace Fitness_App
                     Application.Current.Windows[0].Close();
                 }
             }
+            if (IsPause) IsPause = false;
         }
 
         public void NextOnClick(object Sender, RoutedEventArgs Args)

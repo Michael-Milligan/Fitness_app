@@ -18,7 +18,7 @@ namespace Fitness_App
 
         public MainWindow()
         {
-            Title = "Fitness";
+            Title = "Фитнес";
 
             StackPanel Panel = new StackPanel();
 
@@ -26,14 +26,14 @@ namespace Fitness_App
             Button ExercisesComplexes = new Button();
             ExercisesComplexes.Height = 50;
             ExercisesComplexes.Width = 500;
-            ExercisesComplexes.Content = "Complexes of exercises";
+            ExercisesComplexes.Content = "Комплексы упражнений";
             ExercisesComplexes.Click += ProceedToCopmlexes;
             Panel.Children.Add(ExercisesComplexes);
 
             Button Exit = new Button();
             Exit.Height = 50;
             Exit.Width = 500;
-            Exit.Content = "Exit";
+            Exit.Content = "Выход";
             Exit.Click += ExitOnClick;
             Panel.Children.Add(Exit);
 
@@ -54,8 +54,8 @@ namespace Fitness_App
         public void ExitOnClick(object Sender, RoutedEventArgs Args)
         {
             MessageBoxResult Result = 
-                MessageBox.Show("Do you really want to quit?", 
-                "Question",
+                MessageBox.Show("Вы действительно хотите выйти?", 
+                "Вопрос:",
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes) Application.Current.Shutdown();

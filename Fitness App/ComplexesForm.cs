@@ -9,7 +9,7 @@ namespace Fitness_App
         public ComplexesForm(ExerciseComplex[] Complexes)
         {
             this.Complexes = Complexes;
-            Title = "Complexes of exercises";
+            Title = "Комплексы упражнений:";
             Grid Panel = new Grid();
             Button[] Buttons = new Button[Complexes.Length];
 
@@ -26,8 +26,6 @@ namespace Fitness_App
                 Panel.RowDefinitions.Add(new RowDefinition());
                 Buttons[i] = new Button();
                 Buttons[i].Tag = i;
-                //Buttons[i].Width = 300;
-                //Buttons[i].Height = 50;
                 Buttons[i].Content = Complexes[i].MuscleGroup;
                 Buttons[i].Click += ReadinessControl;
                 Panel.Children.Add(Buttons[i]);
@@ -36,9 +34,7 @@ namespace Fitness_App
 
                 Edit[i] = new Button();
                 Edit[i].Tag = i;
-                //Edit[i].Width = 300;
-                //Edit[i].Height = 50;
-                Edit[i].Content = "Edit";
+                Edit[i].Content = "Изменить";
                 Edit[i].Click += EditOnClick;
                 Panel.Children.Add(Edit[i]);
                 Grid.SetColumn(Edit[i], 1);
@@ -47,7 +43,7 @@ namespace Fitness_App
 
             Button Return = new Button();
             Panel.RowDefinitions.Add(new RowDefinition());
-            Return.Content = "Return";
+            Return.Content = "Назад";
             Return.Click += ExitOnClick;
             Panel.Children.Add(Return);
             Grid.SetRow(Return, Buttons.Length);
@@ -69,8 +65,8 @@ namespace Fitness_App
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
         {
-            MessageBoxResult Result = MessageBox.Show("Are you ready for the complex?", 
-                "Question:", 
+            MessageBoxResult Result = MessageBox.Show("Вы готовы приступить к выполнению?", 
+                "Вопрос:", 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)

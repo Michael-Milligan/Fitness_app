@@ -104,7 +104,7 @@ namespace Fitness_App
 
                 #region Remove
                 Button Remove = new Button();
-                Remove.Content = "Remove";
+                Remove.Content = "Убрать";
                 Remove.Tag = i;
                 Remove.Click += RemoveOnClick;
 
@@ -121,7 +121,7 @@ namespace Fitness_App
             grid.RowDefinitions.Add(RowAdd);
 
             Button Add = new Button();
-            Add.Content = "Add";
+            Add.Content = "Добавить";
             Add.Click += AddOnClick;
 
             grid.Children.Add(Add);
@@ -136,7 +136,7 @@ namespace Fitness_App
             grid.RowDefinitions.Add(RowReturn);
 
             Button Return = new Button();
-            Return.Content = "Return";
+            Return.Content = "Назад";
             Return.Click += ReturnOnClick;
 
             grid.Children.Add(Return);

@@ -28,7 +28,7 @@ namespace Fitness_App
         public void ChangeQuantity(int NewNumberOfTimes)
         {
             if (NewNumberOfTimes > 0) Quantity = NewNumberOfTimes;
-            else throw new ArgumentException("Invalid number of times");
+            else throw new ArgumentException("Неверное кол-во раз");
         }
         public Exercise(Exercise Example)
         {
