@@ -45,6 +45,7 @@ namespace Fitness_App
         {
             var Form = new MainWindow();
             Info.locale = new Locale() { Type = "en" };
+            Methods.RefreshPath();
             Info.locale.GenerateText();
             File.WriteAllText(@"src\locales\initiation.txt", "en");
             Form.RefreshWindow();
@@ -55,6 +56,7 @@ namespace Fitness_App
         {
             var Form = new MainWindow();
             Info.locale = new Locale() { Type = "ru" };
+            Methods.RefreshPath();
             Info.locale.GenerateText();
             File.WriteAllText(@"src\locales\initiation.txt", "ru");
             Form.RefreshWindow();

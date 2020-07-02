@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,7 +7,8 @@ namespace Fitness_App
 {
     class AddComplexForm : Window
     {
-        string Name;
+        string NameRU;
+        string NameEN;
         public AddComplexForm()
         {
             Title = Info.locale.AddComplexFormText[0];
@@ -22,12 +24,21 @@ namespace Fitness_App
             Grid.SetColumnSpan(Question, 2);
             Grid.SetRow(Question, 0);
 
-            TextBox Input = new TextBox();
-            Input.TextChanged += NameOnChange;
-            grid.Children.Add(Input);
+            TextBox InputRU = new TextBox();
+            InputRU.Text = "Русский";
+            InputRU.TextChanged += NameRUOnChange;
+            grid.Children.Add(InputRU);
             grid.RowDefinitions.Add(new RowDefinition());
-            Grid.SetColumnSpan(Input, 2);
-            Grid.SetRow(Input, 1);
+            Grid.SetColumn(InputRU, 0);
+            Grid.SetRow(InputRU, 1);
+
+            TextBox InputEN = new TextBox();
+            InputEN.Text = "English";
+            InputEN.TextChanged += NameENOnChange;
+            grid.Children.Add(InputEN);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(InputEN, 1);
+            Grid.SetRow(InputEN, 1);
 
             Button Send = new Button();
             Send.Content = Info.locale.AddComplexFormText[2];
@@ -47,28 +58,67 @@ namespace Fitness_App
             Content = grid;
         }
 
-        public void NameOnChange(object Sender, RoutedEventArgs Args)
+        public void NameRUOnChange(object Sender, RoutedEventArgs Args)
         {
-            Name = (Sender as TextBox).Text;
+            NameRU = (Sender as TextBox).Text;
+        }
+
+        public void NameENOnChange(object Sender, RoutedEventArgs Args)
+        {
+            NameEN = (Sender as TextBox).Text;
         }
 
         public void SendOnClick(object Sender, RoutedEventArgs Args)
         {
+            var Result = AddComplexRU();
+
+            Result = AddComplexEN();
+
+            Info.locale.Type = File.ReadAllText(@"src\locales\initiation.txt");
+            Methods.RefreshPath();
+            Application.Current.Windows[0].Content = new ComplexesForm(Methods.SynthesizeComplexes()).Content;
+        }
+
+        public ExerciseComplex[] AddComplexRU()
+        {
+            Info.locale.Type = "ru";
+            Info.locale.GenerateText();
+            Methods.RefreshPath();
             var temp = Methods.SynthesizeComplexes();
             ExerciseComplex[] Result = new ExerciseComplex[temp.Length + 1];
             for (int i = 0; i < temp.Length; ++i)
             {
                 Result[i] = temp[i];
             }
-            Result[Result.Length - 1] = new ExerciseComplex(Name)
+            Result[Result.Length - 1] = new ExerciseComplex(NameRU)
             {
                 Exercises = new System.Collections.Generic.List<Exercise>()
             };
             Result[Result.Length - 1].Exercises.Add(new Exercise(Info.locale.AddComplexFormText[4],
                 Info.locale.AddComplexFormText[5], 1, false, ""));
             Methods.RewriteExercises(Result);
+            return Result;
+        }
 
-            Application.Current.Windows[0].Content = new ComplexesForm(Result).Content;
+        public ExerciseComplex[] AddComplexEN()
+        {
+            Info.locale.Type = "en";
+            Info.locale.GenerateText();
+            Methods.RefreshPath();
+            var temp = Methods.SynthesizeComplexes();
+            ExerciseComplex[] Result = new ExerciseComplex[temp.Length + 1];
+            for (int i = 0; i < temp.Length; ++i)
+            {
+                Result[i] = temp[i];
+            }
+            Result[Result.Length - 1] = new ExerciseComplex(NameEN)
+            {
+                Exercises = new System.Collections.Generic.List<Exercise>()
+            };
+            Result[Result.Length - 1].Exercises.Add(new Exercise(Info.locale.AddComplexFormText[4],
+                Info.locale.AddComplexFormText[5], 1, false, ""));
+            Methods.RewriteExercises(Result);
+            return Result;
         }
 
         public void ReturnOnClick(object Sender, RoutedEventArgs Args)

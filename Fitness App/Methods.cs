@@ -30,5 +30,10 @@ namespace Fitness_App
             }
             return Results;
         }
+
+        public static void RefreshPath()
+        {
+            Path = $@"src\Exercises{Info.locale.Type.ToUpper()}.json";
+        }
     }
 }
