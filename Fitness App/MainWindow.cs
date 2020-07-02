@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,13 +10,14 @@ namespace Fitness_App
         [STAThread]
         static void Main()
         {
+            Info.Initiation = File.ReadAllText(@"src\locales\initiation.txt");
             new Application().Run(new MainWindow());
         }
 
         public MainWindow()
         {
             if (Info.locale == null)
-                Info.locale = new Locale() { Type = "en" };
+                Info.locale = new Locale() { Type = Info.Initiation };
             Info.locale.GenerateText();
             //locale = new Locale();
             //locale.SetText();

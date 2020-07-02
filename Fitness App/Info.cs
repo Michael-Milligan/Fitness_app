@@ -9,5 +9,6 @@ namespace Fitness_App
     class Info
     {
         public static Locale locale;
+        public static string Initiation;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Fitness_App
@@ -45,6 +46,7 @@ namespace Fitness_App
             var Form = new MainWindow();
             Info.locale = new Locale() { Type = "en" };
             Info.locale.GenerateText();
+            File.WriteAllText(@"src\locales\initiation.txt", "en");
             Form.RefreshWindow();
             Application.Current.Windows[0].Content = Form.Content;
         }
@@ -54,6 +56,7 @@ namespace Fitness_App
             var Form = new MainWindow();
             Info.locale = new Locale() { Type = "ru" };
             Info.locale.GenerateText();
+            File.WriteAllText(@"src\locales\initiation.txt", "ru");
             Form.RefreshWindow();
             Application.Current.Windows[0].Content = Form.Content;
         }
