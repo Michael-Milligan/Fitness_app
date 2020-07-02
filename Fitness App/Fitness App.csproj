@@ -51,6 +51,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddComplexForm.cs" />
     <Compile Include="AddExerciseForm.cs" />
     <Compile Include="ComplexesForm.cs" />
     <Compile Include="Exercise.cs" />

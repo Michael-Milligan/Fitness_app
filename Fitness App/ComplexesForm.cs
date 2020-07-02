@@ -41,12 +41,20 @@ namespace Fitness_App
                 Grid.SetRow(Edit[i], i);
             }
 
+            Button AddComplex = new Button();
+            Panel.RowDefinitions.Add(new RowDefinition());
+            AddComplex.Content = Info.locale.ComplexesFormText[2];
+            AddComplex.Click += AddOnClick;
+            Panel.Children.Add(AddComplex);
+            Grid.SetRow(AddComplex, Buttons.Length);
+            Grid.SetColumnSpan(AddComplex, 2);
+
             Button Return = new Button();
             Panel.RowDefinitions.Add(new RowDefinition());
-            Return.Content = Info.locale.ComplexesFormText[2];
+            Return.Content = Info.locale.ComplexesFormText[3];
             Return.Click += ExitOnClick;
             Panel.Children.Add(Return);
-            Grid.SetRow(Return, Buttons.Length);
+            Grid.SetRow(Return, Buttons.Length + 1);
             Grid.SetColumnSpan(Return, 2);
 
             Content = Panel;
@@ -63,8 +71,8 @@ namespace Fitness_App
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
         {
-            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[3],
-                Info.locale.ComplexesFormText[4], 
+            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[4],
+                Info.locale.ComplexesFormText[5], 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)
@@ -77,6 +85,11 @@ namespace Fitness_App
         public void ExitOnClick(object Sender, RoutedEventArgs Args)
         {
             Application.Current.Windows[0].Content = new MainWindow().Content;
+        }
+
+        public void AddOnClick(object Sender, RoutedEventArgs Args)
+        {
+            Application.Current.Windows[0].Content = new AddComplexForm().Content;
         }
     }
 }

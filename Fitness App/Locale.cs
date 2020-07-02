@@ -17,6 +17,8 @@ namespace Fitness_App
         public string[] ComplexesFormText;
         [DataMember]
         public string[] ExerciseExecutionFormText;
+        [DataMember]
+        public string[] AddComplexFormText;
         public string Type;
 
         public void GenerateText()
@@ -34,6 +36,7 @@ namespace Fitness_App
             AddExerciseFormText = locale.AddExerciseFormText;
             ComplexesFormText = locale.ComplexesFormText;
             ExerciseExecutionFormText = locale.ExerciseExecutionFormText;
+            AddComplexFormText = locale.AddComplexFormText;
         } 
         //For adding languages
         /*
