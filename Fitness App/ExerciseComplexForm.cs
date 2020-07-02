@@ -201,7 +201,7 @@ namespace Fitness_App
                 Application.Current.Windows[0].Content =
                     new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, 
                     Result[ComplexIndex], 
-                    ComplexIndex).Content as Grid;
+                    ComplexIndex).Content as ScrollViewer;
             }
             catch (System.OverflowException) { }
             
@@ -228,7 +228,7 @@ namespace Fitness_App
                 Application.Current.Windows[0].Content =
                     new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
                     Result[ComplexIndex],
-                    ComplexIndex).Content as Grid;
+                    ComplexIndex).Content as ScrollViewer;
             }
             catch (System.Exception) { }
         }

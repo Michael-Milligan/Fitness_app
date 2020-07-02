@@ -20,4 +20,3 @@ D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\Fitness App_MarkupComp
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\Fitness App_MarkupCompile.lref
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\SetLocale.baml
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Release\Fitness App.g.resources
-D:\GitHub\Fitness_app\Fitness App\obj\Release\Fitness App.csprojAssemblyReference.cache
