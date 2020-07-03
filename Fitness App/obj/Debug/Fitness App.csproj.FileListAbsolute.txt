@@ -23,3 +23,4 @@ D:\GitHub\Fitness App\Fitness_app\Fitness App\bin\Debug\Fitness App.pdb
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.exe
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.pdb
 D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.cache
+D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.cache

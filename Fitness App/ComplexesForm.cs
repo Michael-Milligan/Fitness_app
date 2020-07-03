@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using System.IO;
 
 namespace Fitness_App
 {
@@ -77,14 +78,30 @@ namespace Fitness_App
 
         private void RemoveOnClick(object Sender, RoutedEventArgs Args)
         {
-            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Button Remove = Sender as Button;
-            int ComplexIndex = (int)Remove.Tag;
+            var Answer = MessageBox.Show(Info.locale.ComplexesFormText[5], Info.locale.ComplexesFormText[6],
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(Answer == MessageBoxResult.Yes)
+            {
+                Button Remove = Sender as Button;
+                int ComplexIndex = (int)Remove.Tag;
 
-            Result = Result.Where(item => item != Result[ComplexIndex]).ToArray();
+                Info.locale.Type = "en";
+                Methods.RefreshPath();
+                ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+                Result = Result.Where(item => item != Result[ComplexIndex]).ToArray();
+                Methods.RewriteExercises(Result);
 
-            Methods.RewriteExercises(Result);
-            Application.Current.Windows[0].Content = new ComplexesForm(Result).Content;
+                Info.locale.Type = "ru";
+                Methods.RefreshPath();
+                Result = Methods.SynthesizeComplexes();
+                Result = Result.Where(item => item != Result[ComplexIndex]).ToArray();
+                Methods.RewriteExercises(Result);
+
+                Info.locale.Type = File.ReadAllText(@"src\locales\initiation.txt");
+                Methods.RefreshPath();
+                Result = Methods.SynthesizeComplexes();
+                Application.Current.Windows[0].Content = new ComplexesForm(Result).Content;
+            }
         }
 
         public void EditOnClick(object Sender, RoutedEventArgs Args)
@@ -98,8 +115,8 @@ namespace Fitness_App
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
         {
-            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[5],
-                Info.locale.ComplexesFormText[6], 
+            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[7],
+                Info.locale.ComplexesFormText[8], 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)
