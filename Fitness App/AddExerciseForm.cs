@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,10 +7,12 @@ namespace Fitness_App
 {
     class AddExerciseForm : Window
     {
-        string ExerciseName;
+        string ExerciseNameRU;
+        string ExerciseNameEN;
         int Quantity;
         bool MeasuredInTimes;
-        string Type;
+        string TypeRU;
+        string TypeEN;
         int ComplexIndex;
         string Path;
 
@@ -33,135 +33,188 @@ namespace Fitness_App
             #region Labels
 
 
-            Label TypeLabel = new Label();
-            TypeLabel.Content = Info.locale.AddExerciseFormText[1];
-            grid.Children.Add(TypeLabel);
+            Label TypeRULabel = new Label();
+            TypeRULabel.Content = Info.locale.AddExerciseFormText[1];
+            grid.Children.Add(TypeRULabel);
             grid.RowDefinitions.Add(new RowDefinition());
-            Grid.SetColumn(TypeLabel, 0);
-            Grid.SetRow(TypeLabel, 0);
+            Grid.SetColumn(TypeRULabel, 0);
+            Grid.SetRow(TypeRULabel, 0);
 
-            Label NameLabel = new Label();
-            NameLabel.Content = Info.locale.AddExerciseFormText[2];
-            grid.Children.Add(NameLabel);
+            Label TypeENLabel = new Label();
+            TypeENLabel.Content = Info.locale.AddExerciseFormText[2];
+            grid.Children.Add(TypeENLabel);
             grid.RowDefinitions.Add(new RowDefinition());
-            Grid.SetColumn(NameLabel, 0);
-            Grid.SetRow(NameLabel, 1);
+            Grid.SetColumn(TypeENLabel, 0);
+            Grid.SetRow(TypeENLabel, 1);
+
+            Label NameRULabel = new Label();
+            NameRULabel.Content = Info.locale.AddExerciseFormText[3];
+            grid.Children.Add(NameRULabel);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(NameRULabel, 0);
+            Grid.SetRow(NameRULabel, 2);
+
+            Label NameENLabel = new Label();
+            NameENLabel.Content = Info.locale.AddExerciseFormText[4];
+            grid.Children.Add(NameENLabel);
+            grid.RowDefinitions.Add(new RowDefinition());
+            Grid.SetColumn(NameENLabel, 0);
+            Grid.SetRow(NameENLabel, 3);
 
             Label QuantityLabel = new Label();
-            QuantityLabel.Content = Info.locale.AddExerciseFormText[3];
+            QuantityLabel.Content = Info.locale.AddExerciseFormText[5];
             grid.Children.Add(QuantityLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(QuantityLabel, 0);
-            Grid.SetRow(QuantityLabel, 2);
+            Grid.SetRow(QuantityLabel, 4);
 
             Label MeasureLabel = new Label();
-            MeasureLabel.Content = Info.locale.AddExerciseFormText[4];
+            MeasureLabel.Content = Info.locale.AddExerciseFormText[6];
             grid.Children.Add(MeasureLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(MeasureLabel, 0);
-            Grid.SetRow(MeasureLabel, 3);
+            Grid.SetRow(MeasureLabel, 5);
 
             Label PathLabel = new Label();
-            PathLabel.Content = Info.locale.AddExerciseFormText[5];
+            PathLabel.Content = Info.locale.AddExerciseFormText[7];
             grid.Children.Add(PathLabel);
             grid.RowDefinitions.Add(new RowDefinition());
             Grid.SetColumn(PathLabel, 0);
-            Grid.SetRow(PathLabel, 4);
+            Grid.SetRow(PathLabel, 6);
 
             #endregion
 
             #region TextBoxes
 
-            TextBox TypeBox = new TextBox();
-            TypeBox.TextChanged += TypeOnChange;
-            grid.Children.Add(TypeBox);
-            Grid.SetColumn(TypeBox, 1);
-            Grid.SetRow(TypeBox, 0);
+            TextBox TypeRUBox = new TextBox();
+            TypeRUBox.TextChanged += TypeRUOnChange;
+            grid.Children.Add(TypeRUBox);
+            Grid.SetColumn(TypeRUBox, 1);
+            Grid.SetRow(TypeRUBox, 0);
 
-            TextBox NameBox = new TextBox();
-            NameBox.TextChanged += NameOnChange;
-            grid.Children.Add(NameBox);
-            Grid.SetColumn(NameBox, 1);
-            Grid.SetRow(NameBox, 1);
+            TextBox TypeENBox = new TextBox();
+            TypeENBox.TextChanged += TypeENOnChange;
+            grid.Children.Add(TypeENBox);
+            Grid.SetColumn(TypeENBox, 1);
+            Grid.SetRow(TypeENBox, 1);
+
+            TextBox NameRUBox = new TextBox();
+            NameRUBox.TextChanged += NameRUOnChange;
+            grid.Children.Add(NameRUBox);
+            Grid.SetColumn(NameRUBox, 1);
+            Grid.SetRow(NameRUBox, 2);
+
+            TextBox NameENBox = new TextBox();
+            NameENBox.TextChanged += NameENOnChange;
+            grid.Children.Add(NameENBox);
+            Grid.SetColumn(NameENBox, 1);
+            Grid.SetRow(NameENBox, 3);
 
             TextBox QuantityBox = new TextBox();
             QuantityBox.TextChanged += QuantityOnChange;
             grid.Children.Add(QuantityBox);
             Grid.SetColumn(QuantityBox, 1);
-            Grid.SetRow(QuantityBox, 2);
+            Grid.SetRow(QuantityBox, 4);
 
             TextBox MeasureBox = new TextBox();
             MeasureBox.TextChanged += MeasureOnChange;
             grid.Children.Add(MeasureBox);
             Grid.SetColumn(MeasureBox, 1);
-            Grid.SetRow(MeasureBox, 3);
+            Grid.SetRow(MeasureBox, 5);
 
             TextBox PathBox = new TextBox();
             PathBox.TextChanged += PathOnChange;
             grid.Children.Add(PathBox);
             Grid.SetColumn(PathBox, 1);
-            Grid.SetRow(PathBox, 4);
+            Grid.SetRow(PathBox, 6);
             #endregion
 
             #region Buttons
             Button Send = new Button();
-            Send.Content = Info.locale.AddExerciseFormText[6];
+            Send.Content = Info.locale.AddExerciseFormText[8];
             grid.RowDefinitions.Add(new RowDefinition());
             Send.Click += SendOnClick;
             grid.Children.Add(Send);
-            Grid.SetRow(Send, 5);
+            Grid.SetRow(Send, 7);
             Grid.SetColumn(Send, 0);
 
             Button Return = new Button();
-            Return.Content = Info.locale.AddExerciseFormText[7];
+            Return.Content = Info.locale.AddExerciseFormText[9];
             Return.Click += ReturnOnClick;
             grid.Children.Add(Return);
-            Grid.SetRow(Return, 5);
+            Grid.SetRow(Return, 7);
             Grid.SetColumn(Return, 1);
             #endregion
             
             Content = grid;
         }
 
-        #region Done
         
-        public void TypeOnChange(object Sender, TextChangedEventArgs Args)
+
+        #region Done
+
+        public void TypeRUOnChange(object Sender, TextChangedEventArgs Args)
         {
-            Grid grid = this.Content as Grid;
-            Type = (grid.Children[5] as TextBox).Text;
+            Grid grid = Content as Grid;
+            TypeRU = (grid.Children[7] as TextBox).Text;
         }
 
-        public void NameOnChange(object Sender, TextChangedEventArgs Args)
+        public void TypeENOnChange(object Sender, TextChangedEventArgs Args)
+        {
+            Grid grid = Content as Grid;
+            TypeEN = (grid.Children[8] as TextBox).Text;
+        }
+
+        public void NameRUOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = this.Content as Grid;
-            ExerciseName = (grid.Children[6] as TextBox).Text;
+            ExerciseNameRU = (grid.Children[9] as TextBox).Text;
+        }
+
+        private void NameENOnChange(object Sender, TextChangedEventArgs Args)
+        {
+            Grid grid = Content as Grid;
+            ExerciseNameEN = (grid.Children[10] as TextBox).Text;
         }
 
         public void QuantityOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = Content as Grid;
-            Quantity = Convert.ToInt32((grid.Children[7] as TextBox).Text);
+            Quantity = Convert.ToInt32((grid.Children[11] as TextBox).Text);
         }
 
         public void MeasureOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = Content as Grid;
-            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[8] as TextBox).Text));
+            MeasuredInTimes = Convert.ToBoolean(Convert.ToInt32((grid.Children[12] as TextBox).Text));
         }
 
         public void PathOnChange(object Sender, TextChangedEventArgs Args)
         {
             Grid grid = Content as Grid;
-            Path = (grid.Children[9] as TextBox).Text;
+            Path = (grid.Children[13] as TextBox).Text;
         }
 
         public void SendOnClick(object Sender, RoutedEventArgs Args)
         {
+            Info.locale.Type = "en";
+            Methods.RefreshPath();
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
-            Result[ComplexIndex].AddExercise(new Exercise(Type, ExerciseName, Quantity, MeasuredInTimes, 
+            Result[ComplexIndex].AddExercise(new Exercise(TypeEN, ExerciseNameEN, Quantity, MeasuredInTimes, 
                 $@"src\img\{Path}"));
             Methods.RewriteExercises(Result);
 
+            Info.locale.Type = "ru";
+            Methods.RefreshPath();
+            Result = Methods.SynthesizeComplexes();
+            Result[ComplexIndex].AddExercise(new Exercise(TypeRU, ExerciseNameRU, Quantity, MeasuredInTimes,
+                $@"src\img\{Path}"));
+            Methods.RewriteExercises(Result);
+
+            Info.locale.Type = File.ReadAllText(@"src\locales\initiation.txt");
+            Methods.RefreshPath();
+            Info.locale.GenerateText();
+            Result = Methods.SynthesizeComplexes();
             Application.Current.Windows[0].Content = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
                 Result[ComplexIndex],
                 ComplexIndex).Content;
@@ -171,7 +224,6 @@ namespace Fitness_App
         {
             ExerciseComplex[] Result = Methods.SynthesizeComplexes();
             
-                    Show();
             Application.Current.Windows[0].Content = new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup,
                 Result[ComplexIndex],
                 ComplexIndex).Content;

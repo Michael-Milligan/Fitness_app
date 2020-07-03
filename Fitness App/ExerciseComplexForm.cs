@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -243,15 +244,31 @@ namespace Fitness_App
 
         public void RemoveOnClick(object Sender, RoutedEventArgs Args)
         {
-            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
             Button Remove = Sender as Button;
+
+            Info.locale.Type = "en";
+            Methods.RefreshPath();
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
             Result[ComplexIndex].
                 RemoveExercise(
                 Result[ComplexIndex].
                 Exercises[(int)Remove.Tag]);
-            Application.Current.Windows[0].Content =
-                (new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, Result[ComplexIndex], ComplexIndex).Content as Grid);
             Methods.RewriteExercises(Result);
+
+            Info.locale.Type = "ru";
+            Methods.RefreshPath();
+            Result = Methods.SynthesizeComplexes();
+            Result[ComplexIndex].
+                RemoveExercise(
+                Result[ComplexIndex].
+                Exercises[(int)Remove.Tag]);
+            Methods.RewriteExercises(Result);
+
+            Info.locale.Type = File.ReadAllText(@"src\locales\initiation.txt");
+            Result = Methods.SynthesizeComplexes();
+            Application.Current.Windows[0].Content =
+                (new ExerciseComplexForm(Result[ComplexIndex].MuscleGroup, Result[ComplexIndex], 
+                ComplexIndex).Content as ScrollViewer);
         }
 
         public void ReturnOnClick(object Sender, RoutedEventArgs Args)
