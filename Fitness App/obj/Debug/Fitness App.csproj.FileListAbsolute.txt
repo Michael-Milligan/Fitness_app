@@ -22,9 +22,4 @@ D:\GitHub\Fitness App\Fitness_app\Fitness App\bin\Debug\Fitness App.exe
 D:\GitHub\Fitness App\Fitness_app\Fitness App\bin\Debug\Fitness App.pdb
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.exe
 D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.pdb
-D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\SetLocale.g.cs
-D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App_MarkupCompile.cache
-D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App_MarkupCompile.lref
-D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\SetLocale.baml
-D:\GitHub\Fitness App\Fitness_app\Fitness App\obj\Debug\Fitness App.g.resources
 D:\GitHub\Fitness_app\Fitness App\obj\Debug\Fitness App.csprojAssemblyReference.cache

@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace Fitness_App
 {
@@ -8,6 +10,8 @@ namespace Fitness_App
         ExerciseComplex[] Complexes;
         public ComplexesForm(ExerciseComplex[] Complexes)
         {
+            ScrollViewer Scroll = new ScrollViewer();
+
             this.Complexes = Complexes;
             Title = Info.locale.ComplexesFormText[0];
             Grid Panel = new Grid();
@@ -15,11 +19,13 @@ namespace Fitness_App
 
             Panel.ColumnDefinitions.Add(new ColumnDefinition());
             Panel.ColumnDefinitions.Add(new ColumnDefinition());
-            Panel.ColumnDefinitions[0].Width = new GridLength(90, GridUnitType.Star);
-            Panel.ColumnDefinitions[1].Width = new GridLength(10, GridUnitType.Star);
+            Panel.ColumnDefinitions.Add(new ColumnDefinition());
+            Panel.ColumnDefinitions[0].Width = new GridLength(70, GridUnitType.Star);
+            Panel.ColumnDefinitions[1].Width = new GridLength(20, GridUnitType.Star);
+            Panel.ColumnDefinitions[2].Width = new GridLength(10, GridUnitType.Star);
 
             Button[] Edit = new Button[Buttons.Length];
-            
+            Button[] Remove = new Button[Buttons.Length];
 
             for (int i = 0; i < Buttons.Length; ++i)
             {
@@ -31,7 +37,7 @@ namespace Fitness_App
                 Panel.Children.Add(Buttons[i]);
                 Grid.SetColumn(Buttons[i], 0);
                 Grid.SetRow(Buttons[i], i);
-
+                
                 Edit[i] = new Button();
                 Edit[i].Tag = i;
                 Edit[i].Content = Info.locale.ComplexesFormText[1];
@@ -39,25 +45,46 @@ namespace Fitness_App
                 Panel.Children.Add(Edit[i]);
                 Grid.SetColumn(Edit[i], 1);
                 Grid.SetRow(Edit[i], i);
+
+                Remove[i] = new Button();
+                Remove[i].Tag = i;
+                Remove[i].Content = Info.locale.ComplexesFormText[2];
+                Remove[i].Click += RemoveOnClick;
+                Panel.Children.Add(Remove[i]);
+                Grid.SetColumn(Remove[i], 2);
+                Grid.SetRow(Remove[i], i);
             }
 
             Button AddComplex = new Button();
             Panel.RowDefinitions.Add(new RowDefinition());
-            AddComplex.Content = Info.locale.ComplexesFormText[2];
+            AddComplex.Content = Info.locale.ComplexesFormText[3];
             AddComplex.Click += AddOnClick;
             Panel.Children.Add(AddComplex);
             Grid.SetRow(AddComplex, Buttons.Length);
-            Grid.SetColumnSpan(AddComplex, 2);
+            Grid.SetColumn(AddComplex, 0);
 
             Button Return = new Button();
-            Panel.RowDefinitions.Add(new RowDefinition());
-            Return.Content = Info.locale.ComplexesFormText[3];
+            Return.Content = Info.locale.ComplexesFormText[4];
             Return.Click += ExitOnClick;
             Panel.Children.Add(Return);
-            Grid.SetRow(Return, Buttons.Length + 1);
+            Grid.SetRow(Return, Buttons.Length);
             Grid.SetColumnSpan(Return, 2);
+            Grid.SetColumn(Return, 1);
 
-            Content = Panel;
+            Scroll.Content = Panel;
+            Content = Scroll;
+        }
+
+        private void RemoveOnClick(object Sender, RoutedEventArgs Args)
+        {
+            ExerciseComplex[] Result = Methods.SynthesizeComplexes();
+            Button Remove = Sender as Button;
+            int ComplexIndex = (int)Remove.Tag;
+
+            Result = Result.Where(item => item != Result[ComplexIndex]).ToArray();
+
+            Methods.RewriteExercises(Result);
+            Application.Current.Windows[0].Content = new ComplexesForm(Result).Content;
         }
 
         public void EditOnClick(object Sender, RoutedEventArgs Args)
@@ -71,8 +98,8 @@ namespace Fitness_App
 
         public void ReadinessControl(object Sender, RoutedEventArgs Args)
         {
-            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[4],
-                Info.locale.ComplexesFormText[5], 
+            MessageBoxResult Result = MessageBox.Show(Info.locale.ComplexesFormText[5],
+                Info.locale.ComplexesFormText[6], 
                 MessageBoxButton.YesNo, 
                 MessageBoxImage.Question);
             if (Result == MessageBoxResult.Yes)
