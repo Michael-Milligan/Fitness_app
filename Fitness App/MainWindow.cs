@@ -19,8 +19,6 @@ namespace Fitness_App
             if (Info.locale == null)
                 Info.locale = new Locale() { Type = Info.Initiation };
             Info.locale.GenerateText();
-            //locale = new Locale();
-            //locale.SetText();
 
             Title = Info.locale.MainWindowText[0];
 
